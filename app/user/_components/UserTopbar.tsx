@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { useTheme } from "../../context/ThemeContext";
 
 const PAGE_TITLES: Record<string, string> = {
   "/user": "My Dashboard",
@@ -23,16 +24,17 @@ export default function UserTopbar() {
   const router = useRouter();
   const [showNotifs, setShowNotifs] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { dark, toggle } = useTheme();
 
   const title = PAGE_TITLES[pathname] ?? "Employee Portal";
 
   return (
     <>
-    <header className="h-14 shrink-0 bg-white border-b border-[#e5e5e5] flex items-center justify-between px-5 gap-4">
+    <header className="h-14 shrink-0 bg-white dark:bg-[#1e293b] border-b border-[#e5e5e5] dark:border-[#334155] flex items-center justify-between px-5 gap-4">
       <div className="flex items-center gap-3">
         {/* Hamburger — mobile only */}
         <button
-          className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-[#737373] hover:bg-[#f5f5f5] transition-colors"
+          className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors"
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
         >
@@ -40,15 +42,32 @@ export default function UserTopbar() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <h1 className="text-[#002244] font-semibold text-sm">{title}</h1>
+        <h1 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">{title}</h1>
       </div>
 
       <div className="flex items-center gap-2">
+        {/* Theme toggle */}
+        <button
+          onClick={toggle}
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors"
+          aria-label="Toggle theme"
+        >
+          {dark ? (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+            </svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          )}
+        </button>
+
         {/* Notifications */}
         <div className="relative">
           <button
             onClick={() => setShowNotifs(!showNotifs)}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#737373] hover:bg-[#f5f5f5] transition-colors relative"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors relative"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -57,21 +76,21 @@ export default function UserTopbar() {
           </button>
 
           {showNotifs && (
-            <div className="absolute right-0 top-10 w-72 bg-white rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] z-50 overflow-hidden">
-              <div className="px-4 py-3 border-b border-[#e5e5e5]">
-                <p className="text-[#002244] font-semibold text-sm">Notifications</p>
+            <div className="absolute right-0 top-10 w-72 bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] dark:ring-[#334155] z-50 overflow-hidden">
+              <div className="px-4 py-3 border-b border-[#e5e5e5] dark:border-[#334155]">
+                <p className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">Notifications</p>
               </div>
-              <div className="divide-y divide-[#e5e5e5]">
+              <div className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
                 {[
                   { msg: "You are within your branch radius", time: "Just now", dot: "bg-teal-500" },
                   { msg: "Clock-in recorded for April 10", time: "2 days ago", dot: "bg-[#002244]" },
                   { msg: "Attendance report generated", time: "1 week ago", dot: "bg-[#737373]" },
                 ].map((n, i) => (
-                  <div key={i} className="flex items-start gap-3 px-4 py-3 hover:bg-[#f5f5f5] cursor-default">
+                  <div key={i} className="flex items-start gap-3 px-4 py-3 hover:bg-[#f5f5f5] dark:hover:bg-[#334155] cursor-default">
                     <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${n.dot}`} />
                     <div>
-                      <p className="text-[#0a0a0a] text-xs">{n.msg}</p>
-                      <p className="text-[#737373] text-[10px] mt-0.5">{n.time}</p>
+                      <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-xs">{n.msg}</p>
+                      <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] mt-0.5">{n.time}</p>
                     </div>
                   </div>
                 ))}
@@ -83,7 +102,7 @@ export default function UserTopbar() {
         {/* Sign out */}
         <button
           onClick={() => router.push("/login")}
-          className="flex items-center gap-1.5 text-[#737373] hover:text-red-500 text-xs font-medium transition-colors px-2"
+          className="flex items-center gap-1.5 text-[#737373] dark:text-[#94a3b8] hover:text-red-500 dark:hover:text-red-400 text-xs font-medium transition-colors px-2"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -102,9 +121,9 @@ export default function UserTopbar() {
           onClick={() => setMenuOpen(false)}
         />
         {/* Drawer */}
-        <aside className="relative z-10 flex flex-col w-64 max-w-[85vw] bg-white h-full shadow-2xl">
+        <aside className="relative z-10 flex flex-col w-64 max-w-[85vw] bg-white dark:bg-[#1e293b] h-full shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between px-5 py-5 border-b border-[#e5e5e5]">
+          <div className="flex items-center justify-between px-5 py-5 border-b border-[#e5e5e5] dark:border-[#334155]">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-[#002244] flex items-center justify-center shrink-0">
                 <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -113,13 +132,13 @@ export default function UserTopbar() {
                 </svg>
               </div>
               <div>
-                <p className="text-[#002244] font-bold text-sm leading-tight">ProxClocker</p>
-                <p className="text-[#737373] text-[10px]">Employee Portal</p>
+                <p className="text-[#002244] dark:text-[#e2e8f0] font-bold text-sm leading-tight">ProxClocker</p>
+                <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">Employee Portal</p>
               </div>
             </div>
             <button
               onClick={() => setMenuOpen(false)}
-              className="w-8 h-8 flex items-center justify-center rounded-xl text-[#737373] hover:bg-[#f5f5f5]"
+              className="w-8 h-8 flex items-center justify-center rounded-xl text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155]"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -138,11 +157,11 @@ export default function UserTopbar() {
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     active
-                      ? "bg-[#002244] text-white shadow-sm"
-                      : "text-[#737373] hover:bg-[#f5f5f5] hover:text-[#0a0a0a]"
+                      ? "bg-[#002244] dark:bg-teal-600 text-white shadow-sm"
+                      : "text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] hover:text-[#0a0a0a] dark:hover:text-white"
                   }`}
                 >
-                  <span className={active ? "text-white" : "text-[#737373]"}>{item.icon}</span>
+                  <span className={active ? "text-white" : "text-[#737373] dark:text-[#94a3b8]"}>{item.icon}</span>
                   {item.label}
                 </Link>
               );
@@ -151,13 +170,13 @@ export default function UserTopbar() {
 
           {/* User card */}
           <div className="px-3 pb-4">
-            <div className="bg-[#f5f5f5] rounded-xl px-3 py-3 flex items-center gap-3">
+            <div className="bg-[#f5f5f5] dark:bg-[#0f172a] rounded-xl px-3 py-3 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#002244] flex items-center justify-center shrink-0">
                 <span className="text-white text-xs font-bold">SJ</span>
               </div>
               <div className="min-w-0">
-                <p className="text-[#0a0a0a] text-xs font-semibold truncate">Sarah Johnson</p>
-                <p className="text-[#737373] text-[10px] truncate">Marketing Specialist</p>
+                <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-xs font-semibold truncate">Sarah Johnson</p>
+                <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] truncate">Marketing Specialist</p>
               </div>
             </div>
           </div>

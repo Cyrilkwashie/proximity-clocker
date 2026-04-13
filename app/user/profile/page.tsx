@@ -66,81 +66,81 @@ export default function ProfilePage() {
       )}
 
       <div>
-        <h2 className="text-[#002244] font-bold text-xl">My Profile</h2>
-        <p className="text-[#737373] text-sm mt-0.5">Manage your personal information</p>
+        <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">My Profile</h2>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Manage your personal information</p>
       </div>
 
       {/* Avatar card */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
         <div className="flex items-center gap-5">
           <div className="w-16 h-16 rounded-full bg-[#002244] flex items-center justify-center shrink-0">
             <span className="text-white text-xl font-bold">SJ</span>
           </div>
           <div>
-            <p className="text-[#0a0a0a] font-bold text-base">{name}</p>
-            <p className="text-[#737373] text-sm mt-0.5">Marketing Specialist</p>
+            <p className="text-[#0a0a0a] dark:text-[#e2e8f0] font-bold text-base">{name}</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Marketing Specialist</p>
             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" />
-              <span className="text-[#737373] text-xs">Head Office</span>
-              <span className="text-[#e5e5e5]">·</span>
-              <span className="text-[#737373] text-xs">Acme Corporation</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-xs">Head Office</span>
+              <span className="text-[#e5e5e5] dark:text-[#334155]">·</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-xs">Acme Corporation</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Personal info */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6 space-y-4">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6 space-y-4">
         <div>
-          <h3 className="text-[#002244] font-semibold text-sm">Personal Information</h3>
-          <p className="text-[#737373] text-xs mt-0.5">Update your name and phone number</p>
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">Personal Information</h3>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">Update your name and phone number</p>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Full Name</label>
+          <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Full Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] transition-all"
+            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] dark:bg-[#0f172a] dark:text-[#e2e8f0] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] dark:focus:ring-teal-500/20 dark:focus:border-teal-500 transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Email Address</label>
+          <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Email Address</label>
           <input
             value="sarah.johnson@acme.com"
             readOnly
-            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-[#f5f5f5] text-[#737373] cursor-not-allowed"
+            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-[#f5f5f5] dark:bg-[#334155] text-[#737373] dark:text-[#94a3b8] cursor-not-allowed"
           />
-          <p className="text-[10px] text-[#737373] mt-1.5">
+          <p className="text-[10px] text-[#737373] dark:text-[#94a3b8] mt-1.5">
             Email cannot be changed. Contact your admin for help.
           </p>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Phone Number</label>
+          <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Phone Number</label>
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] transition-all"
+            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] dark:bg-[#0f172a] dark:text-[#e2e8f0] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] dark:focus:ring-teal-500/20 dark:focus:border-teal-500 transition-all"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Company</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Company</label>
             <input
               value="Acme Corporation"
               readOnly
-              className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-[#f5f5f5] text-[#737373] cursor-not-allowed"
+              className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-[#f5f5f5] dark:bg-[#334155] text-[#737373] dark:text-[#94a3b8] cursor-not-allowed"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Branch</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Branch</label>
             <input
               value="Head Office"
               readOnly
-              className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-[#f5f5f5] text-[#737373] cursor-not-allowed"
+              className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-[#f5f5f5] dark:bg-[#334155] text-[#737373] dark:text-[#94a3b8] cursor-not-allowed"
             />
           </div>
         </div>
@@ -165,14 +165,14 @@ export default function ProfilePage() {
       </div>
 
       {/* Change password */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6 space-y-4">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6 space-y-4">
         <div>
-          <h3 className="text-[#002244] font-semibold text-sm">Change Password</h3>
-          <p className="text-[#737373] text-xs mt-0.5">Choose a strong, unique password</p>
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">Change Password</h3>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">Choose a strong, unique password</p>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">
+          <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">
             Current Password
           </label>
           <input
@@ -180,13 +180,13 @@ export default function ProfilePage() {
             value={currentPwd}
             onChange={(e) => setCurrentPwd(e.target.value)}
             placeholder="••••••••"
-            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] transition-all"
+            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] dark:bg-[#0f172a] dark:text-[#e2e8f0] rounded-[0.625rem] placeholder:text-[#737373] dark:placeholder:text-[#475569] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] dark:focus:ring-teal-500/20 dark:focus:border-teal-500 transition-all"
           />
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-medium text-[#0a0a0a]">New Password</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0]">New Password</label>
             {pwdStrength && (
               <span className={`text-[10px] font-semibold ${strengthColor}`}>
                 {pwdStrength}
@@ -198,7 +198,7 @@ export default function ProfilePage() {
             value={newPwd}
             onChange={(e) => setNewPwd(e.target.value)}
             placeholder="••••••••"
-            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] transition-all"
+            className="w-full px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] dark:bg-[#0f172a] dark:text-[#e2e8f0] rounded-[0.625rem] placeholder:text-[#737373] dark:placeholder:text-[#475569] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244] dark:focus:ring-teal-500/20 dark:focus:border-teal-500 transition-all"
           />
           {newPwd.length > 0 && (
             <div className="flex gap-1 mt-2">
@@ -212,7 +212,7 @@ export default function ProfilePage() {
                       ? "bg-amber-400"
                       : pwdStrength === "Weak" && i < 1
                       ? "bg-red-400"
-                      : "bg-[#e5e5e5]"
+                      : "bg-[#e5e5e5] dark:bg-[#334155]"
                   }`}
                 />
               ))}
@@ -221,7 +221,7 @@ export default function ProfilePage() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">
+          <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">
             Confirm New Password
           </label>
           <input
@@ -229,10 +229,10 @@ export default function ProfilePage() {
             value={confirmPwd}
             onChange={(e) => setConfirmPwd(e.target.value)}
             placeholder="••••••••"
-            className={`w-full px-3 py-2.5 text-sm border rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full px-3 py-2.5 text-sm border rounded-[0.625rem] placeholder:text-[#737373] dark:placeholder:text-[#475569] focus:outline-none focus:ring-2 transition-all dark:bg-[#0f172a] dark:text-[#e2e8f0] ${
               pwdMismatch
                 ? "border-red-300 focus:ring-red-200 focus:border-red-400"
-                : "border-[#e5e5e5] focus:ring-[#002244]/20 focus:border-[#002244]"
+                : "border-[#e5e5e5] dark:border-[#334155] focus:ring-[#002244]/20 focus:border-[#002244] dark:focus:ring-teal-500/20 dark:focus:border-teal-500"
             }`}
           />
           {pwdMismatch && (
@@ -260,10 +260,10 @@ export default function ProfilePage() {
       </div>
 
       {/* Account info (read-only) */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-sm mb-1">Account Information</h3>
-        <p className="text-[#737373] text-xs mb-4">Read-only system details</p>
-        <div className="divide-y divide-[#e5e5e5]">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm mb-1">Account Information</h3>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-xs mb-4">Read-only system details</p>
+        <div className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
           {[
             { label: "Employee ID", value: "EMP-00247" },
             { label: "Role", value: "Marketing Specialist" },
@@ -273,8 +273,8 @@ export default function ProfilePage() {
             { label: "Date Joined", value: "January 15, 2024" },
           ].map((item) => (
             <div key={item.label} className="flex items-center justify-between py-3 gap-4">
-              <span className="text-[#737373] text-sm shrink-0">{item.label}</span>
-              <span className="text-[#0a0a0a] text-sm font-medium text-right">{item.value}</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-sm shrink-0">{item.label}</span>
+              <span className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium text-right">{item.value}</span>
             </div>
           ))}
         </div>

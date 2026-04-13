@@ -59,29 +59,29 @@ export default function InvitePage() {
     <div className="space-y-5 max-w-2xl">
       {/* Header */}
       <div>
-        <h2 className="text-[#002244] font-bold text-xl">Invite System</h2>
-        <p className="text-[#737373] text-sm mt-0.5">Share your company code or send email invitations to new employees</p>
+        <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Invite System</h2>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Share your company code or send email invitations to new employees</p>
       </div>
 
       {/* Company code card */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
         <div className="flex items-center gap-2 mb-4">
-          <span className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center">
-            <svg className="w-3.5 h-3.5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+          <span className="w-6 h-6 rounded-full bg-teal-50 dark:bg-teal-900/40 flex items-center justify-center">
+            <svg className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
             </svg>
           </span>
-          <h3 className="text-[#002244] font-semibold text-sm">Company Invite Code</h3>
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">Company Invite Code</h3>
         </div>
 
-        <div className="bg-[#f5f5f5] rounded-xl px-5 py-5 flex items-center justify-between gap-4 mb-4">
-          <span className="font-mono text-2xl font-bold tracking-[0.2em] text-[#002244]">{currentCode}</span>
+        <div className="bg-[#f5f5f5] dark:bg-[#0f172a] rounded-xl px-5 py-5 flex items-center justify-between gap-4 mb-4">
+          <span className="font-mono text-2xl font-bold tracking-[0.2em] text-[#002244] dark:text-[#e2e8f0]">{currentCode}</span>
           <button
             onClick={copyCode}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all shrink-0 ${
               codeCopied
-                ? "bg-teal-50 text-teal-700 ring-1 ring-teal-200"
-                : "bg-white text-[#002244] ring-1 ring-[#e5e5e5] hover:ring-[#002244]"
+                ? "bg-teal-50 text-teal-700 ring-1 ring-teal-200 dark:bg-teal-900/40 dark:text-teal-300 dark:ring-teal-800"
+                : "bg-white dark:bg-[#1e293b] text-[#002244] dark:text-[#e2e8f0] ring-1 ring-[#e5e5e5] dark:ring-[#334155] hover:ring-[#002244] dark:hover:ring-teal-500"
             }`}
           >
             {codeCopied ? (
@@ -102,15 +102,15 @@ export default function InvitePage() {
           </button>
         </div>
 
-        <p className="text-[#737373] text-xs mb-4">
+        <p className="text-[#737373] dark:text-[#94a3b8] text-xs mb-4">
           Share this code with new employees. They'll enter it during signup to join your company automatically.
-          Codes expire after <span className="font-medium text-[#0a0a0a]">7 days</span> of no use.
+          Codes expire after <span className="font-medium text-[#0a0a0a] dark:text-[#e2e8f0]">7 days</span> of no use.
         </p>
 
         <button
           onClick={regenerate}
           disabled={regenerating}
-          className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium border border-[#e5e5e5] text-[#737373] hover:text-[#002244] hover:border-[#002244] transition-all disabled:opacity-60"
+          className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium border border-[#e5e5e5] dark:border-[#334155] text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white hover:border-[#002244] dark:hover:border-teal-500 transition-all disabled:opacity-60"
         >
           {regenerating ? (
             <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -127,10 +127,10 @@ export default function InvitePage() {
       </div>
 
       {/* Share link */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-sm mb-3">Shareable Link</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm mb-3">Shareable Link</h3>
         <div className="flex items-center gap-2">
-          <div className="flex-1 px-3 py-2.5 bg-[#f5f5f5] rounded-[0.625rem] text-xs text-[#737373] font-mono truncate border border-[#e5e5e5]">
+          <div className="flex-1 px-3 py-2.5 bg-[#f5f5f5] dark:bg-[#0f172a] rounded-[0.625rem] text-xs text-[#737373] dark:text-[#94a3b8] font-mono truncate border border-[#e5e5e5] dark:border-[#334155]">
             {SHARE_URL}
           </div>
           <button
@@ -147,9 +147,9 @@ export default function InvitePage() {
       </div>
 
       {/* Email invite */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-sm mb-1">Send Email Invitation</h3>
-        <p className="text-[#737373] text-xs mb-4">Send a direct invite link to a specific employee's email address</p>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm mb-1">Send Email Invitation</h3>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-xs mb-4">Send a direct invite link to a specific employee's email address</p>
         <div className="flex gap-2">
           <input
             type="email"
@@ -157,7 +157,7 @@ export default function InvitePage() {
             value={inviteEmail}
             onChange={(e) => setInviteEmail(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendInvite()}
-            className="flex-1 px-3 py-2.5 text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+            className="flex-1 px-3 py-2.5 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
           />
           <button
             onClick={sendInvite}
@@ -178,29 +178,29 @@ export default function InvitePage() {
       </div>
 
       {/* Invite history */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
-        <div className="px-6 py-4 border-b border-[#e5e5e5]">
-          <h3 className="text-[#002244] font-semibold text-sm">Recent Invitations</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
+        <div className="px-6 py-4 border-b border-[#e5e5e5] dark:border-[#334155]">
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">Recent Invitations</h3>
         </div>
-        <div className="divide-y divide-[#e5e5e5]">
+        <div className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
           {inviteHistory.map((inv) => (
-            <div key={inv.id} className="flex items-center justify-between gap-4 px-6 py-3.5 hover:bg-[#fafafa] transition-colors">
+            <div key={inv.id} className="flex items-center justify-between gap-4 px-6 py-3.5 hover:bg-[#fafafa] dark:hover:bg-[#334155]/50 transition-colors">
               <div>
-                <p className="text-[#0a0a0a] text-sm font-medium">{inv.email}</p>
-                <p className="text-[#737373] text-xs mt-0.5">Sent {inv.sentAt}</p>
+                <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium">{inv.email}</p>
+                <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">Sent {inv.sentAt}</p>
               </div>
               <div className="text-right shrink-0">
                 <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                   inv.status === "accepted"
-                    ? "bg-teal-50 text-teal-700"
+                    ? "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300"
                     : inv.status === "pending"
-                    ? "bg-amber-50 text-amber-700"
-                    : "bg-[#f5f5f5] text-[#737373]"
+                    ? "bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                    : "bg-[#f5f5f5] text-[#737373] dark:bg-[#334155] dark:text-[#94a3b8]"
                 }`}>
                   {inv.status.charAt(0).toUpperCase() + inv.status.slice(1)}
                 </span>
                 {inv.usedAt !== "—" && (
-                  <p className="text-[#737373] text-[10px] mt-1">Used {inv.usedAt}</p>
+                  <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] mt-1">Used {inv.usedAt}</p>
                 )}
               </div>
             </div>

@@ -74,8 +74,8 @@ const branchEmployees: Record<string, BranchEmployee[]> = {
 };
 
 const statusStyle: Record<string, string> = {
-  valid: "bg-teal-50 text-teal-700", late: "bg-amber-50 text-amber-700",
-  absent: "bg-[#f5f5f5] text-[#737373]",
+  valid: "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300", late: "bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
+  absent: "bg-[#f5f5f5] text-[#737373] dark:bg-[#334155] dark:text-[#94a3b8]",
 };
 const statusLabel: Record<string, string> = {
   valid: "Valid", late: "Late", absent: "Absent",
@@ -140,8 +140,8 @@ export default function BranchesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-[#002244] font-bold text-xl">Branch Management</h2>
-          <p className="text-[#737373] text-sm mt-0.5">{branches.filter((b) => b.status === "active").length} active branches with GPS radius zones</p>
+          <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Branch Management</h2>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">{branches.filter((b) => b.status === "active").length} active branches with GPS radius zones</p>
         </div>
         <button
           onClick={openCreate}
@@ -157,9 +157,9 @@ export default function BranchesPage() {
       {/* Branch cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {branches.map((b) => (
-          <div key={b.id} className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
+          <div key={b.id} className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
             {/* Map placeholder with radius visualization */}
-            <div className="relative h-36 bg-[#f5f5f5] flex items-center justify-center overflow-hidden">
+            <div className="relative h-36 bg-[#f5f5f5] dark:bg-[#0f172a] flex items-center justify-center overflow-hidden">
               {/* Grid lines */}
               <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -187,7 +187,7 @@ export default function BranchesPage() {
                 </div>
               </div>
               {/* Radius label */}
-              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-semibold text-[#002244] ring-1 ring-[#e5e5e5]">
+              <div className="absolute top-3 right-3 bg-white/90 dark:bg-[#1e293b]/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-semibold text-[#002244] dark:text-[#e2e8f0] ring-1 ring-[#e5e5e5] dark:ring-[#334155]">
                 {b.radius}m radius
               </div>
               {/* Status badge */}
@@ -203,11 +203,11 @@ export default function BranchesPage() {
             {/* Info */}
             <div className="p-4">
               <div className="flex items-start justify-between gap-2 mb-1">
-                <h3 className="text-[#002244] font-semibold text-base leading-tight">{b.name}</h3>
+                <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base leading-tight">{b.name}</h3>
                 <div className="flex gap-1.5 shrink-0">
                   <button
                     onClick={() => openEdit(b)}
-                    className="w-7 h-7 rounded-lg flex items-center justify-center text-[#737373] hover:text-[#002244] hover:bg-[#f5f5f5] transition-all"
+                    className="w-7 h-7 rounded-lg flex items-center justify-center text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-all"
                     title="Edit branch"
                   >
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -225,24 +225,24 @@ export default function BranchesPage() {
                   </button>
                 </div>
               </div>
-              <p className="text-[#737373] text-xs leading-relaxed">{b.address}</p>
-              <p className="text-[#737373] text-xs">{b.city}, {b.country}</p>
+              <p className="text-[#737373] dark:text-[#94a3b8] text-xs leading-relaxed">{b.address}</p>
+              <p className="text-[#737373] dark:text-[#94a3b8] text-xs">{b.city}, {b.country}</p>
 
-              <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#e5e5e5]">
+              <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#e5e5e5] dark:border-[#334155]">
                 <div>
-                  <p className="text-[#002244] text-base font-bold leading-tight">{b.active}</p>
-                  <p className="text-[#737373] text-[10px]">Active now</p>
+                  <p className="text-[#002244] dark:text-[#e2e8f0] text-base font-bold leading-tight">{b.active}</p>
+                  <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">Active now</p>
                 </div>
                 <div>
-                  <p className="text-[#002244] text-base font-bold leading-tight">{b.employees}</p>
-                  <p className="text-[#737373] text-[10px]">Total staff</p>
+                  <p className="text-[#002244] dark:text-[#e2e8f0] text-base font-bold leading-tight">{b.employees}</p>
+                  <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">Total staff</p>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="text-[#737373] text-[10px]">Presence</p>
-                    <p className="text-[#737373] text-[10px]">{b.employees ? Math.round((b.active / b.employees) * 100) : 0}%</p>
+                    <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">Presence</p>
+                    <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">{b.employees ? Math.round((b.active / b.employees) * 100) : 0}%</p>
                   </div>
-                  <div className="h-1.5 bg-[#f5f5f5] rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-[#f5f5f5] dark:bg-[#334155] rounded-full overflow-hidden">
                     <div
                       className="h-full bg-teal-500 rounded-full"
                       style={{ width: `${b.employees ? (b.active / b.employees) * 100 : 0}%` }}
@@ -251,12 +251,12 @@ export default function BranchesPage() {
                 </div>
               </div>
 
-              <div className="mt-3 pt-3 border-t border-[#e5e5e5] grid grid-cols-2 gap-2 text-[10px] text-[#737373]">
+              <div className="mt-3 pt-3 border-t border-[#e5e5e5] dark:border-[#334155] grid grid-cols-2 gap-2 text-[10px] text-[#737373] dark:text-[#94a3b8]">
                 <div>
-                  <span className="font-medium text-[#0a0a0a]">Lat: </span>{b.lat.toFixed(4)}
+                  <span className="font-medium text-[#0a0a0a] dark:text-[#e2e8f0]">Lat: </span>{b.lat.toFixed(4)}
                 </div>
                 <div>
-                  <span className="font-medium text-[#0a0a0a]">Lng: </span>{b.lng.toFixed(4)}
+                  <span className="font-medium text-[#0a0a0a] dark:text-[#e2e8f0]">Lng: </span>{b.lng.toFixed(4)}
                 </div>
               </div>
             </div>
@@ -267,12 +267,12 @@ export default function BranchesPage() {
       {/* Create/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30">
-          <div className="bg-white rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] dark:ring-[#334155] w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-[#002244] font-bold text-base">
+              <h3 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-base">
                 {editBranch ? "Edit Branch" : "Create Branch"}
               </h3>
-              <button onClick={() => setShowModal(false)} className="text-[#737373] hover:text-[#0a0a0a] transition-colors">
+              <button onClick={() => setShowModal(false)} className="text-[#737373] dark:text-[#94a3b8] hover:text-[#0a0a0a] dark:hover:text-white transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -280,70 +280,70 @@ export default function BranchesPage() {
             </div>
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Branch Name *</label>
+                <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Branch Name *</label>
                 <input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="e.g. Head Office"
-                  className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+                  className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Address</label>
+                <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Address</label>
                 <input
                   value={form.address}
                   onChange={(e) => setForm({ ...form, address: e.target.value })}
                   placeholder="Street address"
-                  className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+                  className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">City</label>
+                  <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">City</label>
                   <input
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
                     placeholder="City"
-                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Country</label>
+                  <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Country</label>
                   <input
                     value={form.country}
                     onChange={(e) => setForm({ ...form, country: e.target.value })}
                     placeholder="Country"
-                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Latitude *</label>
+                  <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Latitude *</label>
                   <input
                     value={form.lat}
                     onChange={(e) => setForm({ ...form, lat: e.target.value })}
                     placeholder="e.g. 40.7128"
                     type="number"
                     step="any"
-                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Longitude *</label>
+                  <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Longitude *</label>
                   <input
                     value={form.lng}
                     onChange={(e) => setForm({ ...form, lng: e.target.value })}
                     placeholder="e.g. -74.0060"
                     type="number"
                     step="any"
-                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+                    className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">
-                  Geofence Radius: <span className="text-teal-600 font-semibold">{form.radius}m</span>
+                <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">
+                  Geofence Radius: <span className="text-teal-600 dark:text-teal-400 font-semibold">{form.radius}m</span>
                 </label>
                 <input
                   type="range"
@@ -354,12 +354,12 @@ export default function BranchesPage() {
                   onChange={(e) => setForm({ ...form, radius: e.target.value })}
                   className="w-full accent-teal-600"
                 />
-                <div className="flex justify-between text-[10px] text-[#737373] mt-1">
+                <div className="flex justify-between text-[10px] text-[#737373] dark:text-[#94a3b8] mt-1">
                   <span>25m</span><span>250m</span><span>500m</span>
                 </div>
               </div>
               {/* Radius preview */}
-              <div className="bg-[#f5f5f5] rounded-xl p-4 flex items-center justify-center h-28 relative overflow-hidden">
+              <div className="bg-[#f5f5f5] dark:bg-[#0f172a] rounded-xl p-4 flex items-center justify-center h-28 relative overflow-hidden">
                 <svg className="absolute inset-0 w-full h-full opacity-20">
                   <defs>
                     <pattern id="modal-grid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -382,11 +382,11 @@ export default function BranchesPage() {
                     </svg>
                   </div>
                 </div>
-                <span className="absolute bottom-2.5 right-3 text-[10px] text-[#737373] font-medium">{form.radius}m radius</span>
+                <span className="absolute bottom-2.5 right-3 text-[10px] text-[#737373] dark:text-[#94a3b8] font-medium">{form.radius}m radius</span>
               </div>
             </div>
             <div className="flex gap-3 mt-6">
-              <button onClick={() => setShowModal(false)} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#e5e5e5] text-[#737373] hover:bg-[#f5f5f5] transition-colors">
+              <button onClick={() => setShowModal(false)} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#e5e5e5] dark:border-[#334155] text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors">
                 Cancel
               </button>
               <button onClick={handleSave} className="flex-1 py-2.5 rounded-xl text-sm font-medium bg-[#002244] text-white hover:bg-[#003366] transition-colors">
@@ -400,16 +400,16 @@ export default function BranchesPage() {
       {/* Delete confirmation */}
       {deleteId !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30">
-          <div className="bg-white rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] w-full max-w-sm p-6 text-center">
-            <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] dark:ring-[#334155] w-full max-w-sm p-6 text-center">
+            <div className="w-12 h-12 rounded-full bg-red-50 dark:bg-red-900/30 flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
             </div>
-            <h3 className="text-[#002244] font-bold text-base mb-1">Delete Branch?</h3>
-            <p className="text-[#737373] text-sm mb-6">This action cannot be undone. All associated data will be removed.</p>
+            <h3 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-base mb-1">Delete Branch?</h3>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-sm mb-6">This action cannot be undone. All associated data will be removed.</p>
             <div className="flex gap-3">
-              <button onClick={() => setDeleteId(null)} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#e5e5e5] text-[#737373] hover:bg-[#f5f5f5] transition-colors">
+              <button onClick={() => setDeleteId(null)} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#e5e5e5] dark:border-[#334155] text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors">
                 Cancel
               </button>
               <button onClick={() => handleDelete(deleteId)} className="flex-1 py-2.5 rounded-xl text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition-colors">
@@ -430,23 +430,23 @@ export default function BranchesPage() {
             {/* Backdrop */}
             <div className="flex-1 bg-black/30" onClick={() => setRosterBranch(null)} />
             {/* Drawer */}
-            <div className="w-full max-w-xl bg-white shadow-2xl flex flex-col h-full overflow-hidden">
+            <div className="w-full max-w-xl bg-white dark:bg-[#1e293b] shadow-2xl flex flex-col h-full overflow-hidden">
               {/* Header */}
-              <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-[#e5e5e5] shrink-0">
+              <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-[#e5e5e5] dark:border-[#334155] shrink-0">
                 <div>
-                  <h3 className="text-[#002244] font-bold text-lg leading-tight">{rosterBranch.name}</h3>
-                  <p className="text-[#737373] text-xs mt-0.5">{rosterBranch.address} · {rosterBranch.city}</p>
+                  <h3 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-lg leading-tight">{rosterBranch.name}</h3>
+                  <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">{rosterBranch.address} · {rosterBranch.city}</p>
                   <div className="flex items-center gap-3 mt-2.5">
-                    <span className="flex items-center gap-1.5 text-[10px] font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full ring-1 ring-teal-100">
+                    <span className="flex items-center gap-1.5 text-[10px] font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-900/40 px-2.5 py-1 rounded-full ring-1 ring-teal-100 dark:ring-teal-800">
                       <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
                       {liveCount} Active
                     </span>
-                    <span className="text-[10px] text-[#737373]">{emps.length} total · {absentCount} absent</span>
+                    <span className="text-[10px] text-[#737373] dark:text-[#94a3b8]">{emps.length} total · {absentCount} absent</span>
                   </div>
                 </div>
                 <button
                   onClick={() => setRosterBranch(null)}
-                  className="mt-0.5 text-[#737373] hover:text-[#0a0a0a] transition-colors"
+                  className="mt-0.5 text-[#737373] dark:text-[#94a3b8] hover:text-[#0a0a0a] dark:hover:text-white transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -457,49 +457,49 @@ export default function BranchesPage() {
               {/* Employee table */}
               <div className="flex-1 overflow-y-auto">
                 <table className="w-full text-sm">
-                  <thead className="sticky top-0 bg-[#fafafa] border-b border-[#e5e5e5]">
+                  <thead className="sticky top-0 bg-[#fafafa] dark:bg-[#0f172a] border-b border-[#e5e5e5] dark:border-[#334155]">
                     <tr>
-                      <th className="text-left text-[#737373] text-xs font-medium px-5 py-3">Employee</th>
-                      <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Clock In</th>
-                      <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Clock Out</th>
-                      <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Duration</th>
-                      <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Status</th>
+                      <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-5 py-3">Employee</th>
+                      <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Clock In</th>
+                      <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Clock Out</th>
+                      <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Duration</th>
+                      <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#e5e5e5]">
+                  <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
                     {emps.map((emp) => (
-                      <tr key={emp.email} className={emp.clockedIn ? "bg-teal-50/30" : "hover:bg-[#fafafa]"}>
+                      <tr key={emp.email} className={emp.clockedIn ? "bg-teal-50/30 dark:bg-teal-900/10" : "hover:bg-[#fafafa] dark:hover:bg-[#334155]/50"}>
                         <td className="px-5 py-3.5">
                           <div className="flex items-center gap-2.5">
                             <div className="relative shrink-0">
-                              <div className="w-7 h-7 rounded-full bg-[#002244]/10 flex items-center justify-center">
-                                <span className="text-[#002244] text-[10px] font-bold">{emp.name.charAt(0)}</span>
+                              <div className="w-7 h-7 rounded-full bg-[#002244]/10 dark:bg-[#002244]/30 flex items-center justify-center">
+                                <span className="text-[#002244] dark:text-teal-400 text-[10px] font-bold">{emp.name.charAt(0)}</span>
                               </div>
                               {emp.clockedIn && (
-                                <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-teal-500 ring-1 ring-white animate-pulse" />
+                                <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-teal-500 ring-1 ring-white dark:ring-[#1e293b] animate-pulse" />
                               )}
                             </div>
                             <div>
-                              <p className="text-[#0a0a0a] font-medium text-xs leading-tight">{emp.name}</p>
-                              <p className="text-[#737373] text-[10px]">{emp.role}</p>
+                              <p className="text-[#0a0a0a] dark:text-[#e2e8f0] font-medium text-xs leading-tight">{emp.name}</p>
+                              <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">{emp.role}</p>
                             </div>
                           </div>
                         </td>
                         <td className="px-4 py-3.5">
-                          <span className="text-[#0a0a0a] font-semibold text-xs tabular-nums">{emp.timeIn ?? "—"}</span>
+                          <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-semibold text-xs tabular-nums">{emp.timeIn ?? "—"}</span>
                         </td>
                         <td className="px-4 py-3.5">
                           {emp.clockedIn ? (
-                            <span className="flex items-center gap-1.5 text-teal-600 font-semibold text-xs">
+                            <span className="flex items-center gap-1.5 text-teal-600 dark:text-teal-400 font-semibold text-xs">
                               <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
                               Active
                             </span>
                           ) : (
-                            <span className="text-[#0a0a0a] font-semibold text-xs tabular-nums">{emp.timeOut ?? "—"}</span>
+                            <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-semibold text-xs tabular-nums">{emp.timeOut ?? "—"}</span>
                           )}
                         </td>
                         <td className="px-4 py-3.5">
-                          <span className={`text-xs font-medium ${emp.clockedIn ? "text-teal-600" : "text-[#737373]"}`}>
+                          <span className={`text-xs font-medium ${emp.clockedIn ? "text-teal-600 dark:text-teal-400" : "text-[#737373] dark:text-[#94a3b8]"}`}>
                             {parseDuration(emp.timeIn, emp.timeOut)}
                           </span>
                         </td>

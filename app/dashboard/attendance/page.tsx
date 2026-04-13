@@ -92,9 +92,9 @@ const branches = ["All Branches", "Head Office", "Downtown Hub", "Westside Branc
 const statusOptions = ["All Status", "valid", "late", "absent"];
 
 const statusStyle: Record<string, string> = {
-  valid:  "bg-teal-50 text-teal-700",
-  late:   "bg-amber-50 text-amber-700",
-  absent: "bg-[#f5f5f5] text-[#737373]",
+  valid:  "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
+  late:   "bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
+  absent: "bg-[#f5f5f5] text-[#737373] dark:bg-[#334155] dark:text-[#94a3b8]",
 };
 
 const statusLabel: Record<string, string> = {
@@ -148,7 +148,7 @@ export default function AttendancePage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-3">
-            <h2 className="text-[#002244] font-bold text-xl">Attendance Records</h2>
+            <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Attendance Records</h2>
             {liveCount > 0 && (
               <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-teal-50 text-teal-700 text-[10px] font-bold ring-1 ring-teal-100">
                 <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
@@ -156,9 +156,9 @@ export default function AttendancePage() {
               </span>
             )}
           </div>
-          <p className="text-[#737373] text-sm mt-0.5">GPS-verified clock-in and clock-out logs</p>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">GPS-verified clock-in and clock-out logs</p>
         </div>
-        <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#e5e5e5] text-[#737373] text-sm font-medium hover:border-[#002244] hover:text-[#002244] transition-all">
+        <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#e5e5e5] dark:border-[#334155] text-[#737373] dark:text-[#94a3b8] text-sm font-medium hover:border-[#002244] dark:hover:border-teal-500 hover:text-[#002244] dark:hover:text-white transition-all">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
@@ -176,11 +176,11 @@ export default function AttendancePage() {
           <div
             key={s.key}
             onClick={() => setStatus(status === s.key ? "All Status" : s.key)}
-            className={`bg-white rounded-2xl p-4 cursor-pointer transition-all hover:shadow-md ${
-              status === s.key ? `shadow-sm ring-2 ${s.ring}` : "shadow-sm ring-1 ring-[#e5e5e5]"
+            className={`bg-white dark:bg-[#1e293b] rounded-2xl p-4 cursor-pointer transition-all hover:shadow-md ${
+              status === s.key ? `shadow-sm ring-2 ${s.ring}` : "shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155]"
             }`}
           >
-            <p className="text-[#737373] text-xs font-medium">{s.label}</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs font-medium">{s.label}</p>
             <p className={`text-2xl font-bold mt-1 ${s.textColor}`}>{counts[s.key as keyof typeof counts]}</p>
             <p className={`mt-2 inline-flex text-[10px] font-medium px-1.5 py-0.5 rounded-full ${s.bg} ${s.textColor}`}>
               {status === s.key ? "Filtered ✓" : "Click to filter"}
@@ -190,9 +190,9 @@ export default function AttendancePage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-4 flex flex-col sm:flex-row gap-3 flex-wrap">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-4 flex flex-col sm:flex-row gap-3 flex-wrap">
         <div className="relative flex-1 min-w-48">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373] dark:text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -200,36 +200,36 @@ export default function AttendancePage() {
             placeholder="Search employees..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+            className="w-full pl-9 pr-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
           />
         </div>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
+          className="text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
         />
         <select
           value={branch}
           onChange={(e) => setBranch(e.target.value)}
-          className="text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
+          className="text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
         >
           {branches.map((b) => <option key={b}>{b}</option>)}
         </select>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
+          className="text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
         >
           {statusOptions.map((s) => <option key={s}>{s}</option>)}
         </select>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
-        <div className="px-5 py-4 border-b border-[#e5e5e5] flex items-center justify-between">
-          <p className="text-[#737373] text-xs">{filtered.length} records found</p>
-          <span className="flex items-center gap-1.5 text-[10px] text-[#737373]">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
+        <div className="px-5 py-4 border-b border-[#e5e5e5] dark:border-[#334155] flex items-center justify-between">
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs">{filtered.length} records found</p>
+          <span className="flex items-center gap-1.5 text-[10px] text-[#737373] dark:text-[#94a3b8]">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
             Pulsing dot = still clocked in
           </span>
@@ -237,42 +237,42 @@ export default function AttendancePage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-[#fafafa] border-b border-[#e5e5e5]">
-                <th className="text-left text-[#737373] text-xs font-medium px-5 py-3.5">Employee</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5 hidden md:table-cell">Branch</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5 hidden sm:table-cell">Date</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">Clock In</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">Clock Out</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5 hidden lg:table-cell">Duration</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">Status</th>
+              <tr className="bg-[#fafafa] dark:bg-[#0f172a] border-b border-[#e5e5e5] dark:border-[#334155]">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-5 py-3.5">Employee</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5 hidden md:table-cell">Branch</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5 hidden sm:table-cell">Date</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">Clock In</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">Clock Out</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5 hidden lg:table-cell">Duration</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e5e5e5]">
+            <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
               {filtered.map((log) => (
                 <tr
                   key={log.id}
                   onClick={() => router.push(`/dashboard/employees/history?email=${encodeURIComponent(log.email)}&name=${encodeURIComponent(log.name)}&branch=${encodeURIComponent(log.branch)}`)}
-                  className={`transition-colors cursor-pointer ${log.clockedIn ? "bg-teal-50/20 hover:bg-teal-50/40" : "hover:bg-[#fafafa]"}`}
+                  className={`transition-colors cursor-pointer ${log.clockedIn ? "bg-teal-50/20 dark:bg-teal-900/10 hover:bg-teal-50/40 dark:hover:bg-teal-900/20" : "hover:bg-[#fafafa] dark:hover:bg-[#334155]/50"}`}
                 >
                   {/* Employee */}
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-2.5">
                       <div className="relative shrink-0">
-                        <div className="w-8 h-8 rounded-full bg-[#002244]/10 flex items-center justify-center">
-                          <span className="text-[#002244] text-xs font-bold">{log.name.charAt(0)}</span>
+                        <div className="w-8 h-8 rounded-full bg-[#002244]/10 dark:bg-[#002244]/30 flex items-center justify-center">
+                          <span className="text-[#002244] dark:text-teal-400 text-xs font-bold">{log.name.charAt(0)}</span>
                         </div>
                         {log.clockedIn && (
-                          <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-teal-500 ring-2 ring-white animate-pulse" />
+                          <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-teal-500 ring-2 ring-white dark:ring-[#1e293b] animate-pulse" />
                         )}
                       </div>
                       <div>
-                        <p className="text-[#0a0a0a] font-medium text-sm leading-tight">{log.name}</p>
-                        <p className="text-[#737373] text-xs">{log.email}</p>
+                        <p className="text-[#0a0a0a] dark:text-[#e2e8f0] font-medium text-sm leading-tight">{log.name}</p>
+                        <p className="text-[#737373] dark:text-[#94a3b8] text-xs">{log.email}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3.5 text-[#737373] text-xs hidden md:table-cell">{log.branch}</td>
-                  <td className="px-4 py-3.5 text-[#737373] text-xs hidden sm:table-cell">{log.date}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8] text-xs hidden md:table-cell">{log.branch}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8] text-xs hidden sm:table-cell">{log.date}</td>
 
                   {/* Clock In */}
                   <td className="px-4 py-3.5">
@@ -281,10 +281,10 @@ export default function AttendancePage() {
                         <svg className="w-3 h-3 text-teal-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                           <circle cx="12" cy="12" r="10" /><path strokeLinecap="round" d="M12 6v6l4 2" />
                         </svg>
-                        <span className="text-[#0a0a0a] font-semibold text-sm tabular-nums">{log.timeIn}</span>
+                        <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-semibold text-sm tabular-nums">{log.timeIn}</span>
                       </div>
                     ) : (
-                      <span className="text-[#737373] text-sm">—</span>
+                      <span className="text-[#737373] dark:text-[#94a3b8] text-sm">—</span>
                     )}
                   </td>
 
@@ -293,23 +293,23 @@ export default function AttendancePage() {
                     {log.clockedIn ? (
                       <div className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse shrink-0" />
-                        <span className="text-teal-600 font-semibold text-sm">Active</span>
+                        <span className="text-teal-600 dark:text-teal-400 font-semibold text-sm">Active</span>
                       </div>
                     ) : log.timeOut ? (
                       <div className="flex items-center gap-1.5">
-                        <svg className="w-3 h-3 text-[#737373] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                        <svg className="w-3 h-3 text-[#737373] dark:text-[#94a3b8] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                           <circle cx="12" cy="12" r="10" /><path strokeLinecap="round" d="M12 6v6l4 2" />
                         </svg>
-                        <span className="text-[#0a0a0a] font-semibold text-sm tabular-nums">{log.timeOut}</span>
+                        <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-semibold text-sm tabular-nums">{log.timeOut}</span>
                       </div>
                     ) : (
-                      <span className="text-[#737373] text-sm">—</span>
+                      <span className="text-[#737373] dark:text-[#94a3b8] text-sm">—</span>
                     )}
                   </td>
 
                   {/* Duration */}
                   <td className="px-4 py-3.5 hidden lg:table-cell">
-                    <span className={`text-sm font-medium tabular-nums ${log.clockedIn ? "text-teal-600" : "text-[#737373]"}`}>
+                    <span className={`text-sm font-medium tabular-nums ${log.clockedIn ? "text-teal-600 dark:text-teal-400" : "text-[#737373] dark:text-[#94a3b8]"}`}>
                       {parseDuration(log.timeIn, log.timeOut)}
                     </span>
                   </td>
@@ -325,7 +325,7 @@ export default function AttendancePage() {
             </tbody>
           </table>
           {filtered.length === 0 && (
-            <p className="text-center text-[#737373] text-sm py-12">No records match your filters.</p>
+            <p className="text-center text-[#737373] dark:text-[#94a3b8] text-sm py-12">No records match your filters.</p>
           )}
         </div>
       </div>

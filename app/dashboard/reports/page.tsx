@@ -66,8 +66,8 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-[#002244] font-bold text-xl">Reports & Analytics</h2>
-          <p className="text-[#737373] text-sm mt-0.5">Attendance trends and performance insights</p>
+          <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Reports & Analytics</h2>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Attendance trends and performance insights</p>
         </div>
         <button
           onClick={handleExport}
@@ -97,31 +97,31 @@ export default function ReportsPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
           { label: "Avg Monthly Rate", value: `${Math.round(monthlyData.reduce((a, b) => a + b.rate, 0) / monthlyData.length)}%`, color: "text-teal-600" },
-          { label: "Total Clock-Ins", value: monthlyData.reduce((a, b) => a + b.valid, 0).toLocaleString(), color: "text-[#002244]" },
+          { label: "Total Clock-Ins", value: monthlyData.reduce((a, b) => a + b.valid, 0).toLocaleString(), color: "text-[#002244] dark:text-[#e2e8f0]" },
           { label: "Peak Month", value: monthlyData.find((d) => d.rate === maxRate)?.month ?? "â€”", color: "text-violet-600" },
           { label: "Active Branches", value: "5", color: "text-amber-600" },
         ].map((k) => (
-          <div key={k.label} className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-5">
-            <p className="text-[#737373] text-xs font-medium">{k.label}</p>
+          <div key={k.label} className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-5">
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs font-medium">{k.label}</p>
             <p className={`text-3xl font-bold mt-1 ${k.color}`}>{k.value}</p>
           </div>
         ))}
       </div>
 
       {/* SVG Line Chart */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
         <div className="flex items-center justify-between mb-5">
           <div>
-            <h3 className="text-[#002244] font-semibold text-base">Attendance Rate Trend</h3>
-            <p className="text-[#737373] text-xs mt-0.5">Full year overview â€” 2025</p>
+            <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base">Attendance Rate Trend</h3>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">Full year overview – 2025</p>
           </div>
-          <div className="flex gap-1.5 bg-[#f5f5f5] rounded-xl p-1">
+          <div className="flex gap-1.5 bg-[#f5f5f5] dark:bg-[#0f172a] rounded-xl p-1">
             {(["monthly", "quarterly"] as const).map((p) => (
               <button
                 key={p}
                 onClick={() => { setPeriod(p); setHoveredIdx(null); }}
                 className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
-                  period === p ? "bg-white text-[#002244] shadow-sm" : "text-[#737373]"
+                  period === p ? "bg-white dark:bg-[#1e293b] text-[#002244] dark:text-[#e2e8f0] shadow-sm" : "text-[#737373] dark:text-[#94a3b8]"
                 }`}
               >
                 {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -142,6 +142,24 @@ export default function ReportsPage() {
                 <stop offset="0%" stopColor="#002244" stopOpacity="0.18" />
                 <stop offset="100%" stopColor="#002244" stopOpacity="0" />
               </linearGradient>
+              <linearGradient id="areaGradDark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#94a3b8" stopOpacity="0" />
+              </linearGradient>
+              <style>{`
+                .chart-line { stroke: #002244; }
+                .chart-dot-stroke { stroke: #002244; }
+                .chart-dot-fill { fill: white; }
+                .chart-dot-accent { fill: #002244; }
+                .chart-hover-line { stroke: #002244; }
+                .chart-area { fill: url(#areaGrad); }
+                .dark .chart-line { stroke: #e2e8f0; }
+                .dark .chart-dot-stroke { stroke: #e2e8f0; }
+                .dark .chart-dot-fill { fill: #1e293b; }
+                .dark .chart-dot-accent { fill: #e2e8f0; }
+                .dark .chart-hover-line { stroke: #94a3b8; }
+                .dark .chart-area { fill: url(#areaGradDark); }
+              `}</style>
             </defs>
 
             {/* Y-axis grid lines */}
@@ -151,22 +169,23 @@ export default function ReportsPage() {
                 <g key={v}>
                   <line
                     x1={PAD.left} y1={y} x2={VW - PAD.right} y2={y}
-                    stroke="#e5e5e5" strokeWidth="1" strokeDasharray={v % 10 === 0 ? "0" : "4 3"}
+                    className="stroke-[#e5e5e5] dark:stroke-[#334155]"
+                    strokeWidth="1" strokeDasharray={v % 10 === 0 ? "0" : "4 3"}
                   />
-                  <text x={PAD.left - 6} y={y + 4} textAnchor="end" fontSize="10" fill="#737373">{v}%</text>
+                  <text x={PAD.left - 6} y={y + 4} textAnchor="end" fontSize="10" className="fill-[#737373] dark:fill-[#94a3b8]">{v}%</text>
                 </g>
               );
             })}
 
             {/* Gradient area */}
-            <path d={areaPath} fill="url(#areaGrad)" />
+            <path d={areaPath} className="chart-area" />
 
             {/* Line */}
-            <path d={linePath} fill="none" stroke="#002244" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+            <path d={linePath} fill="none" className="chart-line" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
 
             {/* X-axis labels */}
             {points.map((p, i) => (
-              <text key={i} x={p.x} y={VH - 8} textAnchor="middle" fontSize="10" fill="#737373">{p.month}</text>
+              <text key={i} x={p.x} y={VH - 8} textAnchor="middle" fontSize="10" className="fill-[#737373] dark:fill-[#94a3b8]">{p.month}</text>
             ))}
 
             {/* Hover zones + dots */}
@@ -188,18 +207,18 @@ export default function ReportsPage() {
                 />
                 {/* Vertical hover line */}
                 {hoveredIdx === i && (
-                  <line x1={p.x} y1={PAD.top} x2={p.x} y2={PAD.top + IH} stroke="#002244" strokeWidth="1" strokeDasharray="4 3" opacity="0.4" />
+                  <line x1={p.x} y1={PAD.top} x2={p.x} y2={PAD.top + IH} className="chart-hover-line" strokeWidth="1" strokeDasharray="4 3" opacity="0.4" />
                 )}
                 {/* Dot */}
                 <circle
                   cx={p.x} cy={p.y}
                   r={hoveredIdx === i ? 6 : 4}
-                  fill="white" stroke="#002244" strokeWidth="2.5"
-                  className="transition-all duration-100"
+                  className="chart-dot-fill chart-dot-stroke transition-all duration-100"
+                  strokeWidth="2.5"
                 />
                 {/* Dot accent for high performance */}
                 {p.rate >= 93 && hoveredIdx !== i && (
-                  <circle cx={p.x} cy={p.y} r={2} fill="#002244" />
+                  <circle cx={p.x} cy={p.y} r={2} className="chart-dot-accent" />
                 )}
                 {/* Tooltip */}
                 {hoveredIdx === i && (() => {
@@ -218,16 +237,16 @@ export default function ReportsPage() {
           </svg>
         </div>
 
-        <div className="flex items-center gap-5 mt-2 pt-4 border-t border-[#e5e5e5]">
+        <div className="flex items-center gap-5 mt-2 pt-4 border-t border-[#e5e5e5] dark:border-[#334155]">
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-0.5 bg-[#002244] rounded" />
-            <span className="text-[#737373] text-xs">Attendance rate</span>
+            <span className="text-[#737373] dark:text-[#94a3b8] text-xs">Attendance rate</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-[#002244]" />
-            <span className="text-[#737373] text-xs">â‰¥ 93% excellent</span>
+            <span className="text-[#737373] dark:text-[#94a3b8] text-xs">≥ 93% excellent</span>
           </div>
-          <div className="ml-auto text-[#737373] text-xs hidden sm:block">Hover a point for details</div>
+          <div className="ml-auto text-[#737373] dark:text-[#94a3b8] text-xs hidden sm:block">Hover a point for details</div>
         </div>
       </div>
 
@@ -235,9 +254,9 @@ export default function ReportsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
         {/* Status Donut */}
-        <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6 flex flex-col">
-          <h3 className="text-[#002244] font-semibold text-base">Status Breakdown</h3>
-          <p className="text-[#737373] text-xs mt-0.5 mb-6">All clock-ins this year</p>
+        <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6 flex flex-col">
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base">Status Breakdown</h3>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5 mb-6">All clock-ins this year</p>
 
           <div className="flex-1 flex flex-col items-center justify-center gap-6">
             {/* Donut */}
@@ -253,9 +272,9 @@ export default function ReportsPage() {
             >
               {/* White center */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-28 h-28 rounded-full bg-white flex flex-col items-center justify-center shadow-inner">
-                  <span className="text-2xl font-bold text-[#002244]">{statusBreakdown.valid}%</span>
-                  <span className="text-[10px] text-[#737373] font-medium">On Time</span>
+                <div className="w-28 h-28 rounded-full bg-white dark:bg-[#1e293b] flex flex-col items-center justify-center shadow-inner">
+                  <span className="text-2xl font-bold text-[#002244] dark:text-[#e2e8f0]">{statusBreakdown.valid}%</span>
+                  <span className="text-[10px] text-[#737373] dark:text-[#94a3b8] font-medium">On Time</span>
                 </div>
               </div>
             </div>
@@ -270,8 +289,8 @@ export default function ReportsPage() {
                 <div key={s.label} className="flex items-center gap-2">
                   <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${s.color}`} />
                   <div>
-                    <p className="text-[#0a0a0a] text-[10px] font-semibold leading-tight">{s.pct}%</p>
-                    <p className="text-[#737373] text-[10px] leading-tight">{s.label}</p>
+                    <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-[10px] font-semibold leading-tight">{s.pct}%</p>
+                    <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] leading-tight">{s.label}</p>
                   </div>
                 </div>
               ))}
@@ -280,24 +299,24 @@ export default function ReportsPage() {
         </div>
 
         {/* Branch Performance Bars */}
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6 flex flex-col">
-          <h3 className="text-[#002244] font-semibold text-base">Branch Performance</h3>
-          <p className="text-[#737373] text-xs mt-0.5 mb-6">Average attendance rate by branch</p>
+        <div className="lg:col-span-2 bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6 flex flex-col">
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base">Branch Performance</h3>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5 mb-6">Average attendance rate by branch</p>
 
           <div className="flex-1 space-y-4">
             {branchReport.sort((a, b) => b.avgRate - a.avgRate).map((b) => (
               <div key={b.branch}>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-[#0a0a0a] text-sm font-medium">{b.branch}</span>
-                    <span className="text-[#737373] text-[10px]">{b.employees} staff</span>
+                    <span className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium">{b.branch}</span>
+                    <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">{b.employees} staff</span>
                   </div>
                   <div className="flex items-center gap-3 text-xs tabular-nums">
                     <span className="text-teal-600 font-medium">{b.onTime} on time</span>
                     <span className="text-[#0a0a0a] font-bold">{b.avgRate}%</span>
                   </div>
                 </div>
-                <div className="h-2.5 bg-[#f5f5f5] rounded-full overflow-hidden">
+                <div className="h-2.5 bg-[#f5f5f5] dark:bg-[#334155] rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${
                       b.avgRate >= 93 ? "bg-teal-500" : b.avgRate >= 88 ? "bg-[#002244]" : "bg-amber-400"
@@ -317,18 +336,18 @@ export default function ReportsPage() {
             ))}
           </div>
 
-          <div className="flex items-center gap-4 pt-4 mt-4 border-t border-[#e5e5e5]">
+          <div className="flex items-center gap-4 pt-4 mt-4 border-t border-[#e5e5e5] dark:border-[#334155]">
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-teal-500" />
-              <span className="text-[#737373] text-[10px]">â‰¥93% Excellent</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">≥93% Excellent</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-[#002244]" />
-              <span className="text-[#737373] text-[10px]">88â€“92% Good</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">88–92% Good</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-              <span className="text-[#737373] text-[10px]">&lt;88% Review</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">&lt;88% Review</span>
             </div>
           </div>
         </div>

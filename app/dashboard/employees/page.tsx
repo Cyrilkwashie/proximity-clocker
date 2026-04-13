@@ -93,10 +93,10 @@ export default function EmployeesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-[#002244] font-bold text-xl">Employees</h2>
-          <p className="text-[#737373] text-sm mt-0.5">
+          <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Employees</h2>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">
             {TOTAL_EMPLOYEES} total registered
-            <span className="text-[#e5e5e5] mx-1.5">·</span>
+            <span className="text-[#e5e5e5] dark:text-[#334155] mx-1.5">·</span>
             showing {filtered.length} of {allEmployees.length}
           </p>
         </div>
@@ -112,9 +112,9 @@ export default function EmployeesPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-4 flex flex-col sm:flex-row gap-3">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-4 flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373] dark:text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -122,20 +122,20 @@ export default function EmployeesPage() {
             placeholder="Search employees..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+            className="w-full pl-9 pr-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
           />
         </div>
         <select
           value={branch}
           onChange={(e) => setBranch(e.target.value)}
-          className="text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
+          className="text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
         >
           {branches.map((b) => <option key={b}>{b}</option>)}
         </select>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="text-sm border border-[#e5e5e5] rounded-[0.625rem] bg-white px-3 py-2 text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
+          className="text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
         >
           <option value="all">All Status</option>
           <option value="active">Active</option>
@@ -144,43 +144,43 @@ export default function EmployeesPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-[#fafafa] border-b border-[#e5e5e5]">
-                <th className="text-left text-[#737373] text-xs font-medium px-5 py-3.5">Name</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5 hidden md:table-cell">Role</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">Branch</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5 hidden lg:table-cell">Last Clock-In</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">Status</th>
-                <th className="text-right text-[#737373] text-xs font-medium px-5 py-3.5">Actions</th>
+              <tr className="bg-[#fafafa] dark:bg-[#0f172a] border-b border-[#e5e5e5] dark:border-[#334155]">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-5 py-3.5">Name</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5 hidden md:table-cell">Role</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">Branch</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5 hidden lg:table-cell">Last Clock-In</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">Status</th>
+                <th className="text-right text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-5 py-3.5">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e5e5e5]">
+            <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
               {filtered.map((emp) => (
                 <tr
                   key={emp.id}
-                  className="hover:bg-[#fafafa] transition-colors cursor-pointer"
+                  className="hover:bg-[#fafafa] dark:hover:bg-[#334155]/50 transition-colors cursor-pointer"
                   onClick={() => router.push(`/dashboard/employees/history?email=${encodeURIComponent(emp.email)}&name=${encodeURIComponent(emp.name)}&role=${encodeURIComponent(emp.role)}&branch=${encodeURIComponent(emp.branch)}`)}
                 >
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#002244]/10 flex items-center justify-center shrink-0">
-                        <span className="text-[#002244] text-xs font-semibold">{emp.name.charAt(0)}</span>
+                      <div className="w-8 h-8 rounded-full bg-[#002244]/10 dark:bg-[#002244]/30 flex items-center justify-center shrink-0">
+                        <span className="text-[#002244] dark:text-teal-400 text-xs font-semibold">{emp.name.charAt(0)}</span>
                       </div>
                       <div>
-                        <p className="text-[#0a0a0a] font-medium leading-tight">{emp.name}</p>
-                        <p className="text-[#737373] text-xs">{emp.email}</p>
+                        <p className="text-[#0a0a0a] dark:text-[#e2e8f0] font-medium leading-tight">{emp.name}</p>
+                        <p className="text-[#737373] dark:text-[#94a3b8] text-xs">{emp.email}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3.5 text-[#737373] hidden md:table-cell">{emp.role}</td>
-                  <td className="px-4 py-3.5 text-[#737373]">{emp.branch}</td>
-                  <td className="px-4 py-3.5 text-[#737373] hidden lg:table-cell">{emp.lastClock}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8] hidden md:table-cell">{emp.role}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8]">{emp.branch}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8] hidden lg:table-cell">{emp.lastClock}</td>
                   <td className="px-4 py-3.5">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                      emp.status === "active" ? "bg-teal-50 text-teal-700" : "bg-[#f5f5f5] text-[#737373]"
+                      emp.status === "active" ? "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300" : "bg-[#f5f5f5] text-[#737373] dark:bg-[#334155] dark:text-[#94a3b8]"
                     }`}>
                       {emp.status === "active" ? "Active" : "Inactive"}
                     </span>
@@ -205,7 +205,7 @@ export default function EmployeesPage() {
             </tbody>
           </table>
           {filtered.length === 0 && (
-            <p className="text-center text-[#737373] text-sm py-12">No employees match your filters.</p>
+            <p className="text-center text-[#737373] dark:text-[#94a3b8] text-sm py-12">No employees match your filters.</p>
           )}
         </div>
       </div>
@@ -213,12 +213,12 @@ export default function EmployeesPage() {
       {/* Add/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30">
-          <div className="bg-white rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] w-full max-w-md p-6">
+          <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl ring-1 ring-[#e5e5e5] dark:ring-[#334155] w-full max-w-md p-6">
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-[#002244] font-bold text-base">
+              <h3 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-base">
                 {editEmployee ? "Edit Employee" : "Add Employee"}
               </h3>
-              <button onClick={() => setShowModal(false)} className="text-[#737373] hover:text-[#0a0a0a] transition-colors">
+              <button onClick={() => setShowModal(false)} className="text-[#737373] dark:text-[#94a3b8] hover:text-[#0a0a0a] dark:hover:text-white transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -227,31 +227,31 @@ export default function EmployeesPage() {
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">First Name</label>
-                  <input defaultValue={editEmployee?.name.split(" ")[0]} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
+                  <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">First Name</label>
+                  <input defaultValue={editEmployee?.name.split(" ")[0]} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Last Name</label>
-                  <input defaultValue={editEmployee?.name.split(" ")[1]} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
+                  <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Last Name</label>
+                  <input defaultValue={editEmployee?.name.split(" ")[1]} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Email</label>
-                <input type="email" defaultValue={editEmployee?.email} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
+                <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Email</label>
+                <input type="email" defaultValue={editEmployee?.email} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Branch</label>
-                <select defaultValue={editEmployee?.branch ?? ""} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20">
+                <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Branch</label>
+                <select defaultValue={editEmployee?.branch ?? ""} className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20">
                   {branches.filter((b) => b !== "All Branches").map((b) => <option key={b}>{b}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Role</label>
-                <input defaultValue={editEmployee?.role} placeholder="e.g. Engineer" className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
+                <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Role</label>
+                <input defaultValue={editEmployee?.role} placeholder="e.g. Engineer" className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]" />
               </div>
             </div>
             <div className="flex gap-3 mt-6">
-              <button onClick={() => setShowModal(false)} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#e5e5e5] text-[#737373] hover:bg-[#f5f5f5] transition-colors">
+              <button onClick={() => setShowModal(false)} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#e5e5e5] dark:border-[#334155] text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors">
                 Cancel
               </button>
               <button onClick={() => setShowModal(false)} className="flex-1 py-2.5 rounded-xl text-sm font-medium bg-[#002244] text-white hover:bg-[#003366] transition-colors">

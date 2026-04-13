@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "Dashboard Overview",
@@ -30,15 +31,16 @@ export default function Topbar() {
   const pathname = usePathname();
   const title = pageTitles[pathname] ?? "Dashboard";
   const [menuOpen, setMenuOpen] = useState(false);
+  const { dark, toggle } = useTheme();
 
   return (
     <>
-    <header className="h-16 bg-white border-b border-[#e5e5e5] flex items-center justify-between px-6 shrink-0">
+    <header className="h-16 bg-white dark:bg-[#1e293b] border-b border-[#e5e5e5] dark:border-[#334155] flex items-center justify-between px-6 shrink-0">
       {/* Left: hamburger (mobile) + logo + page title */}
       <div className="flex items-center gap-3">
         {/* Hamburger — mobile only */}
         <button
-          className="lg:hidden w-9 h-9 flex items-center justify-center rounded-xl text-[#737373] hover:bg-[#f5f5f5] transition-colors"
+          className="lg:hidden w-9 h-9 flex items-center justify-center rounded-xl text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-colors"
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
         >
@@ -47,8 +49,8 @@ export default function Topbar() {
           </svg>
         </button>
         <div>
-          <h1 className="text-[#002244] font-semibold text-base leading-tight">{title}</h1>
-          <p className="text-[#737373] text-xs hidden sm:block">
+          <h1 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base leading-tight">{title}</h1>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs hidden sm:block">
             {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
           </p>
         </div>
@@ -56,16 +58,33 @@ export default function Topbar() {
 
       {/* Right: actions */}
       <div className="flex items-center gap-2">
+        {/* Theme toggle */}
+        <button
+          onClick={toggle}
+          className="w-9 h-9 rounded-xl flex items-center justify-center text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-all"
+          aria-label="Toggle theme"
+        >
+          {dark ? (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+            </svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          )}
+        </button>
+
         {/* Notification bell */}
-        <button className="relative w-9 h-9 rounded-xl flex items-center justify-center text-[#737373] hover:text-[#002244] hover:bg-[#f5f5f5] transition-all">
+        <button className="relative w-9 h-9 rounded-xl flex items-center justify-center text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#334155] transition-all">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
-          <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-teal-500 ring-2 ring-white" />
+          <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-teal-500 ring-2 ring-white dark:ring-[#1e293b]" />
         </button>
 
         {/* Divider */}
-        <div className="w-px h-5 bg-[#e5e5e5] mx-1" />
+        <div className="w-px h-5 bg-[#e5e5e5] dark:bg-[#334155] mx-1" />
 
         {/* Admin badge */}
         <div className="flex items-center gap-2.5 pl-1">
@@ -73,15 +92,15 @@ export default function Topbar() {
             <span className="text-white text-xs font-bold">AD</span>
           </div>
           <div className="hidden sm:block">
-            <p className="text-[#002244] text-xs font-semibold leading-tight">Admin User</p>
-            <p className="text-[#737373] text-[10px]">Super Admin</p>
+            <p className="text-[#002244] dark:text-[#e2e8f0] text-xs font-semibold leading-tight">Admin User</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">Super Admin</p>
           </div>
         </div>
 
         {/* Sign out */}
         <Link
           href="/login"
-          className="ml-2 px-3 py-1.5 rounded-xl bg-[#f5f5f5] text-[#737373] text-xs font-medium hover:text-[#002244] hover:bg-[#e5e5e5] transition-all"
+          className="ml-2 px-3 py-1.5 rounded-xl bg-[#f5f5f5] dark:bg-[#0f172a] text-[#737373] dark:text-[#94a3b8] text-xs font-medium hover:text-[#002244] dark:hover:text-white hover:bg-[#e5e5e5] dark:hover:bg-[#334155] transition-all"
         >
           Sign out
         </Link>
@@ -97,9 +116,9 @@ export default function Topbar() {
           onClick={() => setMenuOpen(false)}
         />
         {/* Drawer */}
-        <aside className="relative z-10 flex flex-col w-72 max-w-[85vw] bg-white h-full shadow-2xl">
+        <aside className="relative z-10 flex flex-col w-72 max-w-[85vw] bg-white dark:bg-[#1e293b] h-full shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between px-5 h-16 border-b border-[#e5e5e5] shrink-0">
+          <div className="flex items-center justify-between px-5 h-16 border-b border-[#e5e5e5] dark:border-[#334155] shrink-0">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-[#002244] flex items-center justify-center">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2.2}>
@@ -107,13 +126,13 @@ export default function Topbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <span className="text-[#002244] font-bold text-base tracking-tight leading-tight">
-                Proximity<br /><span className="text-teal-600 text-sm">Clocker</span>
+              <span className="text-[#002244] dark:text-[#e2e8f0] font-bold text-base tracking-tight leading-tight">
+                Proximity<br /><span className="text-teal-600 dark:text-teal-400 text-sm">Clocker</span>
               </span>
             </div>
             <button
               onClick={() => setMenuOpen(false)}
-              className="w-8 h-8 flex items-center justify-center rounded-xl text-[#737373] hover:bg-[#f5f5f5]"
+              className="w-8 h-8 flex items-center justify-center rounded-xl text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155]"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -123,7 +142,7 @@ export default function Topbar() {
 
           {/* Nav links */}
           <nav className="flex-1 py-5 px-3 space-y-0.5 overflow-y-auto">
-            <p className="text-[#737373] text-[10px] font-bold tracking-widest uppercase px-3 mb-3">Main Menu</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] font-bold tracking-widest uppercase px-3 mb-3">Main Menu</p>
             {nav.map((item) => {
               const active = pathname === item.href;
               return (
@@ -133,11 +152,11 @@ export default function Topbar() {
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     active
-                      ? "bg-[#002244] text-white shadow-sm"
-                      : "text-[#737373] hover:text-[#002244] hover:bg-[#f5f5f5]"
+                      ? "bg-[#002244] dark:bg-teal-600 text-white shadow-sm"
+                      : "text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#334155]"
                   }`}
                 >
-                  <span className={active ? "text-white" : "text-[#737373]"}>{item.icon}</span>
+                  <span className={active ? "text-white" : "text-[#737373] dark:text-[#94a3b8]"}>{item.icon}</span>
                   {item.label}
                 </Link>
               );
@@ -145,14 +164,14 @@ export default function Topbar() {
           </nav>
 
           {/* Admin card */}
-          <div className="p-3 border-t border-[#e5e5e5]">
-            <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[#f5f5f5]">
+          <div className="p-3 border-t border-[#e5e5e5] dark:border-[#334155]">
+            <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[#f5f5f5] dark:bg-[#0f172a]">
               <div className="w-8 h-8 rounded-full bg-[#002244] flex items-center justify-center shrink-0">
                 <span className="text-white text-xs font-bold">AD</span>
               </div>
               <div className="min-w-0">
-                <p className="text-[#0a0a0a] text-xs font-semibold truncate">Admin User</p>
-                <p className="text-[#737373] text-[10px] truncate">Super Admin</p>
+                <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-xs font-semibold truncate">Admin User</p>
+                <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] truncate">Super Admin</p>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Sidebar from "./_components/Sidebar";
 import Topbar from "./_components/Topbar";
+import { ThemeLayout } from "../context/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Dashboard | Proximity Clocker",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen bg-[#f5f5f5] overflow-hidden">
+    <ThemeLayout className="flex h-screen bg-[#f5f5f5] dark:bg-[#0f172a] overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Topbar />
@@ -16,6 +17,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {children}
         </main>
       </div>
-    </div>
+    </ThemeLayout>
   );
 }

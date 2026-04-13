@@ -49,13 +49,13 @@ export default function SettingsPage() {
   return (
     <div className="space-y-5 max-w-2xl">
       <div>
-        <h2 className="text-[#002244] font-bold text-xl">Settings</h2>
-        <p className="text-[#737373] text-sm mt-0.5">Manage your profile, security, and system configuration</p>
+        <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Settings</h2>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Manage your profile, security, and system configuration</p>
       </div>
 
       {/* Admin Profile */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-base mb-5">Admin Profile</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base mb-5">Admin Profile</h3>
         <div className="flex items-center gap-4 mb-6">
           <div className="w-16 h-16 rounded-full bg-[#002244] flex items-center justify-center shrink-0">
             <span className="text-white text-xl font-bold">
@@ -63,53 +63,53 @@ export default function SettingsPage() {
             </span>
           </div>
           <div>
-            <p className="text-[#002244] font-semibold">{profile.firstName} {profile.lastName}</p>
-            <p className="text-[#737373] text-sm">{profile.email}</p>
-            <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#002244]/10 text-[#002244]">
+            <p className="text-[#002244] dark:text-[#e2e8f0] font-semibold">{profile.firstName} {profile.lastName}</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-sm">{profile.email}</p>
+            <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#002244]/10 dark:bg-[#002244]/30 text-[#002244] dark:text-teal-400">
               Super Admin
             </span>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">First Name</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">First Name</label>
             <input
               value={profile.firstName}
               onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Last Name</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Last Name</label>
             <input
               value={profile.lastName}
               onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Email Address</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Email Address</label>
             <input
               type="email"
               value={profile.email}
               onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Phone</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Phone</label>
             <input
               value={profile.phone}
               onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
           <div className="sm:col-span-2">
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Company Name</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Company Name</label>
             <input
               value={profile.company}
               onChange={(e) => setProfile({ ...profile, company: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
         </div>
@@ -131,37 +131,37 @@ export default function SettingsPage() {
       </div>
 
       {/* Change Password */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-base mb-4">Change Password</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base mb-4">Change Password</h3>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Current Password</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Current Password</label>
             <input
               type="password"
               value={currPwd}
               onChange={(e) => setCurrPwd(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">New Password</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">New Password</label>
             <input
               type="password"
               value={newPwd}
               onChange={(e) => setNewPwd(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Confirm New Password</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Confirm New Password</label>
             <input
               type="password"
               value={confirmPwd}
               onChange={(e) => setConfirmPwd(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] placeholder:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] placeholder:text-[#737373] dark:placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#002244]/20 focus:border-[#002244]"
             />
           </div>
         </div>
@@ -182,13 +182,13 @@ export default function SettingsPage() {
       </div>
 
       {/* System Configuration */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-base mb-5">System Configuration</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base mb-5">System Configuration</h3>
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">
-                Default Geofence Radius: <span className="text-teal-600">{system.defaultRadius}m</span>
+              <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">
+                Default Geofence Radius: <span className="text-teal-600 dark:text-teal-400">{system.defaultRadius}m</span>
               </label>
               <input
                 type="range" min="25" max="500" step="25"
@@ -198,8 +198,8 @@ export default function SettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">
-                Late Threshold: <span className="text-teal-600">{system.lateThreshold} min</span>
+              <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">
+                Late Threshold: <span className="text-teal-600 dark:text-teal-400">{system.lateThreshold} min</span>
               </label>
               <input
                 type="range" min="5" max="60" step="5"
@@ -210,11 +210,11 @@ export default function SettingsPage() {
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-[#0a0a0a] mb-1.5">Timezone</label>
+            <label className="block text-xs font-medium text-[#0a0a0a] dark:text-[#e2e8f0] mb-1.5">Timezone</label>
             <select
               value={system.timezone}
               onChange={(e) => setSystem({ ...system, timezone: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] rounded-[0.625rem] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
+              className="w-full px-3 py-2 text-sm border border-[#e5e5e5] dark:border-[#334155] rounded-[0.625rem] bg-white dark:bg-[#0f172a] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#002244]/20"
             >
               <option value="America/New_York">America/New_York (UTC-5)</option>
               <option value="America/Chicago">America/Chicago (UTC-6)</option>
@@ -229,16 +229,16 @@ export default function SettingsPage() {
           </div>
 
           {/* Toggles */}
-          <div className="space-y-0 divide-y divide-[#e5e5e5] border border-[#e5e5e5] rounded-xl overflow-hidden">
+          <div className="space-y-0 divide-y divide-[#e5e5e5] dark:divide-[#334155] border border-[#e5e5e5] dark:border-[#334155] rounded-xl overflow-hidden">
             {[
               { key: "allowSelfClock", label: "Allow Self Clock-In", description: "Employees can clock in without admin approval" },
               { key: "gpsRequired", label: "Require GPS Verification", description: "Block clock-ins without valid GPS coordinates" },
               { key: "notifyOnLate", label: "Alert on Late Clock-In", description: "Send notification when employee exceeds late threshold" },
             ].map((toggle) => (
-              <div key={toggle.key} className="flex items-center justify-between gap-4 px-4 py-3.5 bg-white hover:bg-[#fafafa] transition-colors">
+              <div key={toggle.key} className="flex items-center justify-between gap-4 px-4 py-3.5 bg-white dark:bg-[#1e293b] hover:bg-[#fafafa] dark:hover:bg-[#334155]/50 transition-colors">
                 <div>
-                  <p className="text-[#0a0a0a] text-sm font-medium">{toggle.label}</p>
-                  <p className="text-[#737373] text-xs mt-0.5">{toggle.description}</p>
+                  <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium">{toggle.label}</p>
+                  <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">{toggle.description}</p>
                 </div>
                 <button
                   onClick={() => setSystem({ ...system, [toggle.key]: !system[toggle.key as keyof typeof system] })}
@@ -274,9 +274,9 @@ export default function SettingsPage() {
       </div>
 
       {/* Danger zone */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-red-100 p-6">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-red-100 dark:ring-red-900/50 p-6">
         <h3 className="text-red-600 font-semibold text-base mb-1">Danger Zone</h3>
-        <p className="text-[#737373] text-xs mb-4">These actions are irreversible. Proceed with caution.</p>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-xs mb-4">These actions are irreversible. Proceed with caution.</p>
         <div className="flex flex-col sm:flex-row gap-3">
           <button className="px-4 py-2.5 rounded-xl text-sm font-medium border border-red-200 text-red-500 hover:bg-red-50 transition-colors">
             Clear All Attendance Data

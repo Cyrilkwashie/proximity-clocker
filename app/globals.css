@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode — applied to .dark wrapper elements */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ── Cirka font family (landing page only) ─────────────────────────────────── */
 @font-face {
   font-family: 'Cirka';

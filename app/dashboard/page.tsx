@@ -80,8 +80,8 @@ const recentLogs = [
 ];
 
 const statusStyle: Record<string, string> = {
-  valid: "bg-teal-50 text-teal-700",
-  late: "bg-amber-50 text-amber-700",
+  valid: "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
+  late: "bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
 };
 
 // SVG chart geometry
@@ -102,30 +102,30 @@ export default function DashboardPage() {
       {/* Stat cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {stats.map((s) => (
-          <div key={s.label} className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-5">
+          <div key={s.label} className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[#737373] text-xs font-medium">{s.label}</p>
-                <p className="text-[#002244] text-3xl font-bold mt-1">{s.value}</p>
+                <p className="text-[#737373] dark:text-[#94a3b8] text-xs font-medium">{s.label}</p>
+                <p className="text-[#002244] dark:text-[#e2e8f0] text-3xl font-bold mt-1">{s.value}</p>
               </div>
               <span className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${s.color}`}>
                 {s.icon}
               </span>
             </div>
-            <p className="text-[#737373] text-xs mt-3">{s.change}</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-3">{s.change}</p>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
         {/* Weekly attendance bar chart */}
-        <div className="xl:col-span-2 bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
+        <div className="xl:col-span-2 bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-[#002244] font-semibold text-base">Weekly Attendance</h2>
-              <p className="text-[#737373] text-xs mt-0.5">Presence rate by day (this week)</p>
+              <h2 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base">Weekly Attendance</h2>
+              <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">Presence rate by day (this week)</p>
             </div>
-            <span className="text-xs text-teal-600 bg-teal-50 px-2.5 py-1 rounded-full font-medium ring-1 ring-teal-100 flex items-center gap-1.5">
+            <span className="text-xs text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/40 px-2.5 py-1 rounded-full font-medium ring-1 ring-teal-100 dark:ring-teal-800 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />Live
             </span>
           </div>
@@ -142,6 +142,24 @@ export default function DashboardPage() {
                   <stop offset="0%" stopColor="#002244" stopOpacity="0.18" />
                   <stop offset="100%" stopColor="#002244" stopOpacity="0" />
                 </linearGradient>
+                <linearGradient id="wkGradDark" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.22" />
+                  <stop offset="100%" stopColor="#94a3b8" stopOpacity="0" />
+                </linearGradient>
+                <style>{`
+                  .wk-line { stroke: #002244; }
+                  .wk-area { fill: url(#wkGrad); }
+                  .wk-dot-fill { fill: white; }
+                  .wk-dot-stroke { stroke: #002244; }
+                  .wk-dot-accent { fill: #002244; }
+                  .wk-hover-line { stroke: #002244; }
+                  .dark .wk-line { stroke: #e2e8f0; }
+                  .dark .wk-area { fill: url(#wkGradDark); }
+                  .dark .wk-dot-fill { fill: #1e293b; }
+                  .dark .wk-dot-stroke { stroke: #e2e8f0; }
+                  .dark .wk-dot-accent { fill: #e2e8f0; }
+                  .dark .wk-hover-line { stroke: #94a3b8; }
+                `}</style>
               </defs>
 
               {/* Y-axis grid lines at 40 60 80 100 */}
@@ -150,9 +168,9 @@ export default function DashboardPage() {
                 return (
                   <g key={v}>
                     <line x1={PAD.left} y1={y} x2={VW - PAD.right} y2={y}
-                      stroke="#e5e5e5" strokeWidth="1"
+                      className="stroke-[#e5e5e5] dark:stroke-[#334155]" strokeWidth="1"
                       strokeDasharray={v === 100 ? "0" : "4 3"} />
-                    <text x={PAD.left - 6} y={y + 4} textAnchor="end" fontSize="9" fill="#737373">{v}%</text>
+                    <text x={PAD.left - 6} y={y + 4} textAnchor="end" fontSize="9" className="fill-[#737373] dark:fill-[#94a3b8]">{v}%</text>
                   </g>
                 );
               })}
@@ -164,19 +182,19 @@ export default function DashboardPage() {
                   `L ${gx(weeklyBars.length - 1)},${PAD.top + IH}`,
                   `L ${gx(0)},${PAD.top + IH} Z`,
                 ].join(' ')}
-                fill="url(#wkGrad)"
+                className="wk-area"
               />
 
               {/* Line */}
               <path
                 d={weeklyBars.map((b, i) => `${i === 0 ? 'M' : 'L'} ${gx(i)},${gy(b.rate)}`).join(' ')}
-                fill="none" stroke="#002244" strokeWidth="2.5"
+                fill="none" className="wk-line" strokeWidth="2.5"
                 strokeLinejoin="round" strokeLinecap="round"
               />
 
               {/* X-axis labels */}
               {weeklyBars.map((b, i) => (
-                <text key={i} x={gx(i)} y={VH - 6} textAnchor="middle" fontSize="10" fill="#737373">{b.day}</text>
+                <text key={i} x={gx(i)} y={VH - 6} textAnchor="middle" fontSize="10" className="fill-[#737373] dark:fill-[#94a3b8]">{b.day}</text>
               ))}
 
               {/* Dots + hover zones */}
@@ -201,15 +219,15 @@ export default function DashboardPage() {
                     />
                     {isHov && (
                       <line x1={x} y1={PAD.top} x2={x} y2={PAD.top + IH}
-                        stroke="#002244" strokeWidth="1" strokeDasharray="4 3" opacity="0.35" />
+                        className="wk-hover-line" strokeWidth="1" strokeDasharray="4 3" opacity="0.35" />
                     )}
                     <circle cx={x} cy={y}
                       r={isHov ? 6 : 4}
-                      fill="white" stroke={b.rate >= 88 ? "#002244" : b.rate >= 70 ? "#f59e0b" : "#ef4444"}
+                      className={`wk-dot-fill transition-all duration-100 ${b.rate >= 88 ? 'wk-dot-stroke' : ''}`}
+                      stroke={b.rate < 88 ? (b.rate >= 70 ? "#f59e0b" : "#ef4444") : undefined}
                       strokeWidth="2.5"
-                      className="transition-all duration-100"
                     />
-                    {!isHov && b.rate >= 90 && <circle cx={x} cy={y} r={2} fill="#002244" />}
+                    {!isHov && b.rate >= 90 && <circle cx={x} cy={y} r={2} className="wk-dot-accent" />}
                     {isHov && (
                       <g>
                         <rect x={ttX} y={ttY} width={ttW} height={ttH} rx="6" fill="#002244" />
@@ -224,43 +242,43 @@ export default function DashboardPage() {
           </div>
 
           {/* Legend */}
-          <div className="flex items-center gap-4 pt-3 mt-1 border-t border-[#e5e5e5]">
+          <div className="flex items-center gap-4 pt-3 mt-1 border-t border-[#e5e5e5] dark:border-[#334155]">
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-[#002244]" />
-              <span className="text-[#737373] text-[10px]">≥88% Good</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">≥88% Good</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-              <span className="text-[#737373] text-[10px]">70–87% Fair</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">70–87% Fair</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-              <span className="text-[#737373] text-[10px]">&lt;70% Low</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-[10px]">&lt;70% Low</span>
             </div>
-            <span className="ml-auto text-[#737373] text-[10px] hidden sm:block">Hover for details</span>
+            <span className="ml-auto text-[#737373] dark:text-[#94a3b8] text-[10px] hidden sm:block">Hover for details</span>
           </div>
         </div>
 
         {/* Branch activity */}
-        <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-          <h2 className="text-[#002244] font-semibold text-base mb-1">Branch Activity</h2>
-          <p className="text-[#737373] text-xs mb-5">Active employees per branch today</p>
+        <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+          <h2 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base mb-1">Branch Activity</h2>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-xs mb-5">Active employees per branch today</p>
           <div className="space-y-3.5">
             {branches.map((b) => (
               <div key={b.name}>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-[#0a0a0a] text-sm font-medium">{b.name}</span>
+                    <span className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium">{b.name}</span>
                     {b.active === 0 && (
-                      <span className="text-[10px] font-medium text-[#737373] bg-[#f5f5f5] px-1.5 py-0.5 rounded">Inactive</span>
+                      <span className="text-[10px] font-medium text-[#737373] dark:text-[#94a3b8] bg-[#f5f5f5] dark:bg-[#334155] px-1.5 py-0.5 rounded">Inactive</span>
                     )}
                   </div>
-                  <span className="text-[#737373] text-xs tabular-nums">{b.active}/{b.employees}</span>
+                  <span className="text-[#737373] dark:text-[#94a3b8] text-xs tabular-nums">{b.active}/{b.employees}</span>
                 </div>
-                <div className="h-1.5 bg-[#f5f5f5] rounded-full overflow-hidden">
+                <div className="h-1.5 bg-[#f5f5f5] dark:bg-[#334155] rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${
-                      b.rate >= 88 ? "bg-teal-500" : b.rate >= 70 ? "bg-[#002244]" : b.rate > 0 ? "bg-amber-400" : "bg-[#e5e5e5]"
+                      b.rate >= 88 ? "bg-teal-500" : b.rate >= 70 ? "bg-[#002244]" : b.rate > 0 ? "bg-amber-400" : "bg-[#e5e5e5] dark:bg-[#475569]"
                     }`}
                     style={{ width: `${b.rate}%` }}
                   />
@@ -272,32 +290,32 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent clock-ins */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
-        <div className="px-6 py-4 border-b border-[#e5e5e5] flex items-center justify-between">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
+        <div className="px-6 py-4 border-b border-[#e5e5e5] dark:border-[#334155] flex items-center justify-between">
           <div>
-            <h2 className="text-[#002244] font-semibold text-base">Recent Clock-Ins</h2>
-            <p className="text-[#737373] text-xs mt-0.5">Today's latest attendance records</p>
+            <h2 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-base">Recent Clock-Ins</h2>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">Today's latest attendance records</p>
           </div>
-          <a href="/dashboard/attendance" className="text-teal-600 text-xs font-medium hover:underline">
+          <a href="/dashboard/attendance" className="text-teal-600 dark:text-teal-400 text-xs font-medium hover:underline">
             View all →
           </a>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-[#fafafa] border-b border-[#e5e5e5]">
-                <th className="text-left text-[#737373] text-xs font-medium px-6 py-3">Employee</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Branch</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Time</th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3">Status</th>
+              <tr className="bg-[#fafafa] dark:bg-[#0f172a] border-b border-[#e5e5e5] dark:border-[#334155]">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-6 py-3">Employee</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Branch</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Time</th>
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e5e5e5]">
+            <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
               {recentLogs.map((log) => (
-                <tr key={log.name} className="hover:bg-[#fafafa] transition-colors">
-                  <td className="px-6 py-3.5 font-medium text-[#0a0a0a]">{log.name}</td>
-                  <td className="px-4 py-3.5 text-[#737373]">{log.branch}</td>
-                  <td className="px-4 py-3.5 text-[#737373]">{log.time}</td>
+                <tr key={log.name} className="hover:bg-[#fafafa] dark:hover:bg-[#334155]/50 transition-colors">
+                  <td className="px-6 py-3.5 font-medium text-[#0a0a0a] dark:text-[#e2e8f0]">{log.name}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8]">{log.branch}</td>
+                  <td className="px-4 py-3.5 text-[#737373] dark:text-[#94a3b8]">{log.time}</td>
                   <td className="px-4 py-3.5">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium capitalize ${statusStyle[log.status]}`}>
                       {log.status}

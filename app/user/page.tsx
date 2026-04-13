@@ -167,10 +167,10 @@ export default function UserDashboard() {
       {/* Greeting row */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-[#002244] font-bold text-xl">
+          <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">
             Good {getGreeting()}, Sarah
           </h2>
-          <p className="text-[#737373] text-sm mt-0.5">{dateStr}</p>
+          <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">{dateStr}</p>
         </div>
         {/* Location toggle for demo */}
         <button
@@ -215,8 +215,8 @@ export default function UserDashboard() {
       <div className="grid grid-cols-2 gap-4">
         {/* Attendance Status */}
         <div
-          className={`bg-white rounded-2xl shadow-sm ring-1 p-5 transition-all ${
-            clockedIn ? "ring-teal-200" : "ring-[#e5e5e5]"
+          className={`bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 p-5 transition-all ${
+            clockedIn ? "ring-teal-200 dark:ring-teal-700" : "ring-[#e5e5e5] dark:ring-[#334155]"
           }`}
         >
           <div className="flex items-center gap-2 mb-3">
@@ -225,18 +225,18 @@ export default function UserDashboard() {
                 clockedIn ? "bg-teal-500 animate-pulse" : "bg-[#e5e5e5]"
               }`}
             />
-            <p className="text-[#737373] text-[10px] font-semibold uppercase tracking-wide">
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] font-semibold uppercase tracking-wide">
               Status
             </p>
           </div>
           <p
             className={`font-bold text-base leading-tight ${
-              clockedIn ? "text-teal-600" : "text-[#737373]"
+              clockedIn ? "text-teal-600" : "text-[#737373] dark:text-[#94a3b8]"
             }`}
           >
             {clockedIn ? "Clocked In" : "Not Clocked In"}
           </p>
-          <p className="text-[#737373] text-[10px] mt-1.5">
+          <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] mt-1.5">
             {clockedIn && clockInTime
               ? `Since ${clockInTime}`
               : !clockedIn && clockOutTime
@@ -247,12 +247,12 @@ export default function UserDashboard() {
 
         {/* Location Status */}
         <div
-          className={`bg-white rounded-2xl shadow-sm ring-1 p-5 transition-all ${
+          className={`bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 p-5 transition-all ${
             locStatus === "inside"
-              ? "ring-teal-200"
+              ? "ring-teal-200 dark:ring-teal-700"
               : locStatus === "outside"
-              ? "ring-red-200"
-              : "ring-[#e5e5e5]"
+              ? "ring-red-200 dark:ring-red-900"
+              : "ring-[#e5e5e5] dark:ring-[#334155]"
           }`}
         >
           <div className="flex items-center gap-2 mb-3">
@@ -270,7 +270,7 @@ export default function UserDashboard() {
                 <span className="absolute inset-0 rounded-full bg-teal-400 animate-ping opacity-70" />
               )}
             </div>
-            <p className="text-[#737373] text-[10px] font-semibold uppercase tracking-wide">
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] font-semibold uppercase tracking-wide">
               Location
             </p>
           </div>
@@ -289,7 +289,7 @@ export default function UserDashboard() {
               ? "In Range"
               : "Out of Range"}
           </p>
-          <p className="text-[#737373] text-[10px] mt-1.5">
+          <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] mt-1.5">
             {locStatus === "inside"
               ? "Head Office · 150m radius"
               : locStatus === "outside"
@@ -300,14 +300,14 @@ export default function UserDashboard() {
       </div>
 
       {/* Main Action Card */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
         {/* Live elapsed when clocked in */}
         {clockedIn && (
-          <div className="text-center mb-5 pb-5 border-b border-[#e5e5e5]">
-            <p className="text-[#737373] text-[10px] font-semibold uppercase tracking-widest mb-2">
+          <div className="text-center mb-5 pb-5 border-b border-[#e5e5e5] dark:border-[#334155]">
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] font-semibold uppercase tracking-widest mb-2">
               Time on Shift
             </p>
-            <p className="text-4xl font-bold text-[#002244] tabular-nums">
+            <p className="text-4xl font-bold text-[#002244] dark:text-[#e2e8f0] tabular-nums">
               {formatElapsed(elapsed)}
             </p>
             <div className="flex items-center justify-center gap-1.5 mt-2">
@@ -349,12 +349,12 @@ export default function UserDashboard() {
           disabled={btnDisabled}
           className={`w-full py-4 rounded-xl text-base font-bold flex items-center justify-center gap-3 transition-all ${
             acting
-              ? "bg-[#f5f5f5] text-[#737373] cursor-not-allowed"
+              ? "bg-[#f5f5f5] dark:bg-[#334155] text-[#737373] dark:text-[#94a3b8] cursor-not-allowed"
               : clockedIn
               ? "bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/20 active:scale-[0.99]"
               : canClockIn
               ? "bg-teal-600 hover:bg-teal-700 text-white shadow-lg shadow-teal-600/20 active:scale-[0.99]"
-              : "bg-[#f5f5f5] text-[#737373] cursor-not-allowed"
+              : "bg-[#f5f5f5] dark:bg-[#334155] text-[#737373] dark:text-[#94a3b8] cursor-not-allowed"
           }`}
         >
           {acting ? (
@@ -390,7 +390,7 @@ export default function UserDashboard() {
         </button>
 
         {canClockIn && (
-          <p className="text-center text-[#737373] text-xs mt-3">
+          <p className="text-center text-[#737373] dark:text-[#94a3b8] text-xs mt-3">
             ✓ Location verified ·{" "}
             <span className="text-teal-600 font-medium">Head Office</span>
           </p>
@@ -411,19 +411,19 @@ export default function UserDashboard() {
         ].map((s) => (
           <div
             key={s.label}
-            className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-4 text-center"
+            className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-4 text-center"
           >
             <p className={`text-xl font-bold ${s.color}`}>{s.value}</p>
-            <p className="text-[#0a0a0a] text-[10px] font-semibold mt-0.5">{s.label}</p>
-            <p className="text-[#737373] text-[10px]">{s.sub}</p>
+            <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-[10px] font-semibold mt-0.5">{s.label}</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">{s.sub}</p>
           </div>
         ))}
       </div>
 
       {/* Recent records */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-[#e5e5e5]">
-          <h3 className="text-[#002244] font-semibold text-sm">Recent Attendance</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#e5e5e5] dark:border-[#334155]">
+          <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm">Recent Attendance</h3>
           <Link
             href="/user/history"
             className="text-teal-600 text-xs font-medium hover:text-teal-700 transition-colors"
@@ -431,21 +431,21 @@ export default function UserDashboard() {
             View all →
           </Link>
         </div>
-        <div className="divide-y divide-[#e5e5e5]">
+        <div className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
           {recentRecords.map((r, i) => {
             const cls =
               r.status === "valid"
-                ? "bg-teal-50 text-teal-700"
+                ? "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300"
                 : r.status === "late"
-                ? "bg-amber-50 text-amber-700"
-                : "bg-red-50 text-red-600";
+                ? "bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                : "bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400";
             const label =
               r.status === "valid" ? "On Time" : r.status === "late" ? "Late" : "Absent";
             return (
               <div key={i} className="flex items-center justify-between px-5 py-3.5">
                 <div>
-                  <p className="text-[#0a0a0a] text-sm font-medium">{r.date}</p>
-                  <p className="text-[#737373] text-xs mt-0.5">
+                  <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium">{r.date}</p>
+                  <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">
                     {r.timeIn} → {r.timeOut}
                   </p>
                 </div>

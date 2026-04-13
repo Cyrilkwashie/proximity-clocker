@@ -84,23 +84,23 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:flex flex-col w-60 shrink-0 bg-white border-r border-[#e5e5e5] min-h-screen">
+    <aside className="hidden lg:flex flex-col w-60 shrink-0 bg-white dark:bg-[#1e293b] border-r border-[#e5e5e5] dark:border-[#334155] min-h-screen">
       {/* Logo */}
-      <div className="flex items-center gap-2.5 px-5 h-16 border-b border-[#e5e5e5] shrink-0">
+      <div className="flex items-center gap-2.5 px-5 h-16 border-b border-[#e5e5e5] dark:border-[#334155] shrink-0">
         <div className="w-8 h-8 rounded-lg bg-[#002244] flex items-center justify-center">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2.2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         </div>
-        <span className="text-[#002244] font-bold text-base tracking-tight leading-tight">
-          Proximity<br /><span className="text-teal-600 text-sm">Clocker</span>
+        <span className="text-[#002244] dark:text-[#e2e8f0] font-bold text-base tracking-tight leading-tight">
+          Proximity<br /><span className="text-teal-600 dark:text-teal-400 text-sm">Clocker</span>
         </span>
       </div>
 
       {/* Nav */}
       <nav className="flex-1 py-6 px-3 space-y-0.5 overflow-y-auto">
-        <p className="text-[#737373] text-[10px] font-bold tracking-widest uppercase px-3 mb-3">Main Menu</p>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] font-bold tracking-widest uppercase px-3 mb-3">Main Menu</p>
         {nav.map((item) => {
           const active = pathname === item.href;
           return (
@@ -109,11 +109,11 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
                 active
-                  ? "bg-[#002244] text-white shadow-sm shadow-[#002244]/20"
-                  : "text-[#737373] hover:text-[#002244] hover:bg-[#f5f5f5]"
+                  ? "bg-[#002244] dark:bg-teal-600 text-white shadow-sm shadow-[#002244]/20"
+                  : "text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#334155]"
               }`}
             >
-              <span className={active ? "text-white" : "text-[#737373] group-hover:text-[#002244]"}>
+              <span className={active ? "text-white" : "text-[#737373] dark:text-[#94a3b8]"}>
                 {item.icon}
               </span>
               {item.label}
@@ -123,16 +123,16 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom admin card */}
-      <div className="p-3 border-t border-[#e5e5e5]">
-        <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[#f5f5f5]">
+      <div className="p-3 border-t border-[#e5e5e5] dark:border-[#334155]">
+        <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[#f5f5f5] dark:bg-[#0f172a]">
           <div className="w-8 h-8 rounded-full bg-[#002244] flex items-center justify-center shrink-0">
             <span className="text-white text-xs font-bold">AD</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[#002244] text-xs font-semibold truncate">Admin User</p>
-            <p className="text-[#737373] text-[10px] truncate">admin@company.com</p>
+            <p className="text-[#002244] dark:text-[#e2e8f0] text-xs font-semibold truncate">Admin User</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] truncate">admin@company.com</p>
           </div>
-          <Link href="/login" className="text-[#737373] hover:text-[#002244] transition-colors" title="Sign out">
+          <Link href="/login" className="text-[#737373] dark:text-[#94a3b8] hover:text-[#002244] dark:hover:text-white transition-colors" title="Sign out">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>

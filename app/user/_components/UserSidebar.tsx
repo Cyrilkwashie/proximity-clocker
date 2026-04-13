@@ -47,9 +47,9 @@ export default function UserSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex flex-col w-56 shrink-0 bg-white border-r border-[#e5e5e5] h-full">
+    <aside className="hidden md:flex flex-col w-56 shrink-0 bg-white dark:bg-[#1e293b] border-r border-[#e5e5e5] dark:border-[#334155] h-full">
       {/* Logo */}
-      <div className="px-5 py-5 border-b border-[#e5e5e5]">
+      <div className="px-5 py-5 border-b border-[#e5e5e5] dark:border-[#334155]">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-[#002244] flex items-center justify-center shrink-0">
             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -58,8 +58,8 @@ export default function UserSidebar() {
             </svg>
           </div>
           <div>
-            <p className="text-[#002244] font-bold text-sm leading-tight">ProxClocker</p>
-            <p className="text-[#737373] text-[10px]">Employee Portal</p>
+            <p className="text-[#002244] dark:text-[#e2e8f0] font-bold text-sm leading-tight">ProxClocker</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px]">Employee Portal</p>
           </div>
         </div>
       </div>
@@ -74,8 +74,8 @@ export default function UserSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 active
-                  ? "bg-[#002244] text-white shadow-sm"
-                  : "text-[#737373] hover:bg-[#f5f5f5] hover:text-[#0a0a0a]"
+                  ? "bg-[#002244] dark:bg-teal-600 text-white shadow-sm"
+                  : "text-[#737373] dark:text-[#94a3b8] hover:bg-[#f5f5f5] dark:hover:bg-[#334155] hover:text-[#0a0a0a] dark:hover:text-white"
               }`}
             >
               {item.icon}
@@ -87,13 +87,13 @@ export default function UserSidebar() {
 
       {/* User card */}
       <div className="px-3 pb-4">
-        <div className="bg-[#f5f5f5] rounded-xl px-3 py-3 flex items-center gap-3">
+        <div className="bg-[#f5f5f5] dark:bg-[#0f172a] rounded-xl px-3 py-3 flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-[#002244] flex items-center justify-center shrink-0">
             <span className="text-white text-xs font-bold">SJ</span>
           </div>
           <div className="min-w-0">
-            <p className="text-[#0a0a0a] text-xs font-semibold truncate">Sarah Johnson</p>
-            <p className="text-[#737373] text-[10px] truncate">Marketing Specialist</p>
+            <p className="text-[#0a0a0a] dark:text-[#e2e8f0] text-xs font-semibold truncate">Sarah Johnson</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-[10px] truncate">Marketing Specialist</p>
           </div>
         </div>
       </div>

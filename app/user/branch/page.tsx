@@ -23,8 +23,8 @@ export default function BranchPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-5">
       <div>
-        <h2 className="text-[#002244] font-bold text-xl">My Branch</h2>
-        <p className="text-[#737373] text-sm mt-0.5">Your assigned workplace information</p>
+        <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">My Branch</h2>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Your assigned workplace information</p>
       </div>
 
       {/* Branch Hero */}
@@ -69,14 +69,14 @@ export default function BranchPage() {
 
       {/* Your Location Status */}
       <div
-        className={`bg-white rounded-2xl shadow-sm ring-1 p-5 flex items-center justify-between gap-4 ${
-          locSimActive ? "ring-teal-200" : "ring-red-200"
+        className={`bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 p-5 flex items-center justify-between gap-4 ${
+          locSimActive ? "ring-teal-200 dark:ring-teal-700" : "ring-red-200 dark:ring-red-900"
         }`}
       >
         <div className="flex items-center gap-4">
           <div
             className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
-              locSimActive ? "bg-teal-50" : "bg-red-50"
+              locSimActive ? "bg-teal-50 dark:bg-teal-900/30" : "bg-red-50 dark:bg-red-900/30"
             }`}
           >
             <div className="relative">
@@ -98,7 +98,7 @@ export default function BranchPage() {
             >
               {locSimActive ? "You are within range" : "You are outside range"}
             </p>
-            <p className="text-[#737373] text-xs mt-0.5">
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-0.5">
               {locSimActive
                 ? `Within ${BRANCH.radius}m of ${BRANCH.name}`
                 : `More than ${BRANCH.radius}m from ${BRANCH.name}`}
@@ -107,18 +107,18 @@ export default function BranchPage() {
         </div>
         <button
           onClick={() => setLocSimActive(!locSimActive)}
-          className="text-[10px] font-semibold px-2.5 py-1.5 rounded-lg bg-[#f5f5f5] text-[#737373] hover:bg-[#e5e5e5] transition-colors shrink-0"
+          className="text-[10px] font-semibold px-2.5 py-1.5 rounded-lg bg-[#f5f5f5] dark:bg-[#334155] text-[#737373] dark:text-[#94a3b8] hover:bg-[#e5e5e5] dark:hover:bg-[#475569] transition-colors shrink-0"
         >
           Simulate
         </button>
       </div>
 
       {/* Geofence Visual */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-sm mb-4">Geofence Zone</h3>
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm mb-4">Geofence Zone</h3>
 
         <div
-          className="bg-[#f5f5f5] rounded-xl flex items-center justify-center relative overflow-hidden"
+          className="bg-[#f5f5f5] dark:bg-[#0f172a] rounded-xl flex items-center justify-center relative overflow-hidden"
           style={{ height: 210 }}
         >
           {/* Grid background */}
@@ -156,35 +156,35 @@ export default function BranchPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
-            <span className="bg-white px-2 py-0.5 rounded-md text-[10px] font-semibold text-[#002244] shadow-sm">
+            <span className="bg-white dark:bg-[#1e293b] px-2 py-0.5 rounded-md text-[10px] font-semibold text-[#002244] dark:text-[#e2e8f0] shadow-sm">
               {BRANCH.name}
             </span>
           </div>
 
-          <span className="absolute bottom-3 right-4 text-[10px] text-[#737373] bg-white/70 px-2 py-0.5 rounded">
+          <span className="absolute bottom-3 right-4 text-[10px] text-[#737373] dark:text-[#94a3b8] bg-white/70 dark:bg-[#1e293b]/80 px-2 py-0.5 rounded">
             {BRANCH.radius}m radius
           </span>
         </div>
 
         <div className="mt-4 space-y-2.5">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-[#737373]">Coordinates</span>
-            <span className="text-[#0a0a0a] font-medium tabular-nums">
+            <span className="text-[#737373] dark:text-[#94a3b8]">Coordinates</span>
+            <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-medium tabular-nums">
               {BRANCH.lat.toFixed(4)}, {BRANCH.lng.toFixed(4)}
             </span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-[#737373]">Allowed radius</span>
-            <span className="text-[#0a0a0a] font-medium">{BRANCH.radius} meters</span>
+            <span className="text-[#737373] dark:text-[#94a3b8]">Allowed radius</span>
+            <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-medium">{BRANCH.radius} meters</span>
           </div>
         </div>
       </div>
 
       {/* Branch Details */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-6">
-        <h3 className="text-[#002244] font-semibold text-sm mb-1">Branch Details</h3>
-        <p className="text-[#737373] text-xs mb-4">Workplace information and schedule</p>
-        <div className="divide-y divide-[#e5e5e5]">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-6">
+        <h3 className="text-[#002244] dark:text-[#e2e8f0] font-semibold text-sm mb-1">Branch Details</h3>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-xs mb-4">Workplace information and schedule</p>
+        <div className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
           {[
             { label: "Branch Manager", value: BRANCH.manager },
             { label: "Working Hours", value: BRANCH.workHours },
@@ -193,8 +193,8 @@ export default function BranchPage() {
             { label: "Total Staff", value: `${BRANCH.totalStaff} employees` },
           ].map((item) => (
             <div key={item.label} className="flex items-center justify-between py-3 gap-4">
-              <span className="text-[#737373] text-sm shrink-0">{item.label}</span>
-              <span className="text-[#0a0a0a] text-sm font-medium text-right">{item.value}</span>
+              <span className="text-[#737373] dark:text-[#94a3b8] text-sm shrink-0">{item.label}</span>
+              <span className="text-[#0a0a0a] dark:text-[#e2e8f0] text-sm font-medium text-right">{item.value}</span>
             </div>
           ))}
         </div>

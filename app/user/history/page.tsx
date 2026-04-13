@@ -126,9 +126,9 @@ const records: {
 ];
 
 const STATUS_STYLE: Record<Status, string> = {
-  valid: "bg-teal-50 text-teal-700",
-  late: "bg-amber-50 text-amber-700",
-  absent: "bg-[#f5f5f5] text-[#737373]",
+  valid: "bg-teal-50 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
+  late: "bg-amber-50 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
+  absent: "bg-[#f5f5f5] text-[#737373] dark:bg-[#334155] dark:text-[#94a3b8]",
 };
 
 const STATUS_LABEL: Record<Status, string> = {
@@ -151,8 +151,8 @@ export default function HistoryPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-5">
       <div>
-        <h2 className="text-[#002244] font-bold text-xl">Attendance History</h2>
-        <p className="text-[#737373] text-sm mt-0.5">Your personal attendance records</p>
+        <h2 className="text-[#002244] dark:text-[#e2e8f0] font-bold text-xl">Attendance History</h2>
+        <p className="text-[#737373] dark:text-[#94a3b8] text-sm mt-0.5">Your personal attendance records</p>
       </div>
 
       {/* Summary cards */}
@@ -165,10 +165,10 @@ export default function HistoryPage() {
         ].map((s) => (
           <div
             key={s.label}
-            className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] p-4 text-center"
+            className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] p-4 text-center"
           >
             <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
-            <p className="text-[#737373] text-xs mt-1">{s.label}</p>
+            <p className="text-[#737373] dark:text-[#94a3b8] text-xs mt-1">{s.label}</p>
           </div>
         ))}
       </div>
@@ -182,7 +182,7 @@ export default function HistoryPage() {
             className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
               filter === f
                 ? "bg-[#002244] text-white"
-                : "bg-white text-[#737373] ring-1 ring-[#e5e5e5] hover:bg-[#f5f5f5]"
+                : "bg-white dark:bg-[#1e293b] text-[#737373] dark:text-[#94a3b8] ring-1 ring-[#e5e5e5] dark:ring-[#334155] hover:bg-[#f5f5f5] dark:hover:bg-[#334155]"
             }`}
           >
             {f === "all" ? "All Records" : STATUS_LABEL[f]}
@@ -191,53 +191,53 @@ export default function HistoryPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] overflow-hidden">
+      <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm ring-1 ring-[#e5e5e5] dark:ring-[#334155] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-[#fafafa] border-b border-[#e5e5e5]">
-                <th className="text-left text-[#737373] text-xs font-medium px-5 py-3.5">
+              <tr className="bg-[#fafafa] dark:bg-[#0f172a] border-b border-[#e5e5e5] dark:border-[#334155]">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-5 py-3.5">
                   Date
                 </th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">
                   Clock In
                 </th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">
                   Clock Out
                 </th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5">
                   Duration
                 </th>
-                <th className="text-left text-[#737373] text-xs font-medium px-4 py-3.5 hidden sm:table-cell">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-4 py-3.5 hidden sm:table-cell">
                   Branch
                 </th>
-                <th className="text-left text-[#737373] text-xs font-medium px-5 py-3.5">
+                <th className="text-left text-[#737373] dark:text-[#94a3b8] text-xs font-medium px-5 py-3.5">
                   Status
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e5e5e5]">
+            <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#334155]">
               {filtered.map((r) => (
                 <tr
                   key={r.id}
-                  className={r.active ? "bg-teal-50/30" : "hover:bg-[#fafafa]"}
+                  className={r.active ? "bg-teal-50/30 dark:bg-teal-900/10" : "hover:bg-[#fafafa] dark:hover:bg-[#334155]/50"}
                 >
-                  <td className="px-5 py-3.5 font-medium text-[#0a0a0a] text-xs whitespace-nowrap">
+                  <td className="px-5 py-3.5 font-medium text-[#0a0a0a] dark:text-[#e2e8f0] text-xs whitespace-nowrap">
                     {r.date}
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="text-[#0a0a0a] font-semibold text-xs tabular-nums">
+                    <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-semibold text-xs tabular-nums">
                       {r.timeIn ?? "—"}
                     </span>
                   </td>
                   <td className="px-4 py-3.5">
                     {r.active ? (
-                      <span className="flex items-center gap-1.5 text-teal-600 font-semibold text-xs">
+                      <span className="flex items-center gap-1.5 text-teal-600 dark:text-teal-400 font-semibold text-xs">
                         <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
                         Active
                       </span>
                     ) : (
-                      <span className="text-[#0a0a0a] font-semibold text-xs tabular-nums">
+                      <span className="text-[#0a0a0a] dark:text-[#e2e8f0] font-semibold text-xs tabular-nums">
                         {r.timeOut ?? "—"}
                       </span>
                     )}
@@ -245,13 +245,13 @@ export default function HistoryPage() {
                   <td className="px-4 py-3.5">
                     <span
                       className={`text-xs font-medium ${
-                        r.active ? "text-teal-600" : "text-[#737373]"
+                        r.active ? "text-teal-600 dark:text-teal-400" : "text-[#737373] dark:text-[#94a3b8]"
                       } tabular-nums`}
                     >
                       {r.duration}
                     </span>
                   </td>
-                  <td className="px-4 py-3.5 text-xs text-[#737373] hidden sm:table-cell">
+                  <td className="px-4 py-3.5 text-xs text-[#737373] dark:text-[#94a3b8] hidden sm:table-cell">
                     {r.branch}
                   </td>
                   <td className="px-5 py-3.5">
@@ -269,7 +269,7 @@ export default function HistoryPage() {
           </table>
         </div>
         {filtered.length === 0 && (
-          <div className="px-5 py-12 text-center text-[#737373] text-sm">
+          <div className="px-5 py-12 text-center text-[#737373] dark:text-[#94a3b8] text-sm">
             No records match this filter.
           </div>
         )}
