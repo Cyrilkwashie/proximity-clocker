@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+/* ── Cirka font family (landing page only) ─────────────────────────────────── */
+@font-face {
+  font-family: 'Cirka';
+  src: url('/fonts/Cirka/Cirka-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cirka';
+  src: url('/fonts/Cirka/Cirka-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cirka';
+  src: url('/fonts/Cirka/Cirka-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-cirka {
+  font-family: 'Cirka', system-ui, -apple-system, sans-serif;
+  --font-geist-sans: 'Cirka', system-ui, -apple-system, sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
