@@ -7,165 +7,189 @@ import "leaflet/dist/leaflet.css";
 
 /* ─── Data ─────────────────────────────────────────────────────────────────── */
 
-// All 5 branches ~700 m apart — visible at zoom 14-15
+// 5 branches across US cities — auto-fit on load
 const branches = [
-  { id: 1, name: "Head Office",     address: "14 Commerce Ave, Suite 400", city: "Midtown",    lat: 40.75800, lng: -73.98550, radius: 100, employees: 42, active: 38, status: "active"   },
-  { id: 2, name: "Westside Branch", address: "287 West Blvd",              city: "West Side",  lat: 40.75440, lng: -73.99150, radius: 150, employees: 19, active: 17, status: "active"   },
-  { id: 3, name: "Downtown Hub",    address: "55 King Street",             city: "Downtown",   lat: 40.75440, lng: -73.97950, radius: 75,  employees: 28, active: 25, status: "active"   },
-  { id: 4, name: "Airport Desk",    address: "Terminal 2, Gate C",         city: "North Side", lat: 40.76160, lng: -73.97950, radius: 200, employees: 13, active: 9,  status: "active"   },
-  { id: 5, name: "North Campus",    address: "University Park, Block 3",   city: "Upper West", lat: 40.76160, lng: -73.99150, radius: 120, employees: 8,  active: 0,  status: "inactive" },
+  { id: 1, name: "Head Office",     address: "14 Commerce Ave, Suite 400", city: "New York",    lat: 40.7128,  lng: -74.0060,  radius: 100, employees: 42, active: 38, status: "active"   },
+  { id: 2, name: "Westside Branch", address: "287 West Blvd",              city: "Los Angeles", lat: 34.0522,  lng: -118.2437, radius: 150, employees: 19, active: 17, status: "active"   },
+  { id: 3, name: "Downtown Hub",    address: "55 King Street",             city: "Chicago",     lat: 41.8781,  lng: -87.6298,  radius: 75,  employees: 28, active: 25, status: "active"   },
+  { id: 4, name: "Airport Desk",    address: "Terminal 2, Gate C",         city: "Houston",     lat: 29.7604,  lng: -95.3698,  radius: 200, employees: 13, active: 9,  status: "active"   },
+  { id: 5, name: "North Campus",    address: "University Park, Block 3",   city: "Boston",      lat: 42.3601,  lng: -71.0589,  radius: 120, employees: 8,  active: 0,  status: "inactive" },
 ];
 
 const activePeople = [
-  // ── Head Office (40.75800, -73.98550 | r=100m) ──
-  { id: 1,  name: "Lena Vogel",       role: "HR Manager",    branch: "Head Office",     status: "late",  timeIn: "08:35 AM", lat: 40.75808, lng: -73.98540, drifted: false },
-  { id: 2,  name: "Priya Kumar",      role: "Developer",     branch: "Head Office",     status: "late",  timeIn: "09:15 AM", lat: 40.75792, lng: -73.98558, drifted: false },
-  { id: 3,  name: "Felix Nguyen",     role: "Security",      branch: "Head Office",     status: "valid", timeIn: "08:00 AM", lat: 40.75815, lng: -73.98530, drifted: false },
-  { id: 4,  name: "Rachel Kim",       role: "Operations",    branch: "Head Office",     status: "valid", timeIn: "08:10 AM", lat: 40.75796, lng: -73.98555, drifted: false },
-  { id: 5,  name: "Owen Brooks",      role: "Legal",         branch: "Head Office",     status: "valid", timeIn: "07:59 AM", lat: 40.75810, lng: -73.98542, drifted: false },
-  { id: 6,  name: "Marcus Reid",      role: "Engineer",      branch: "Head Office",     status: "valid", timeIn: "08:04 AM", lat: 40.75800, lng: -73.98552, drifted: false },
-  { id: 36, name: "Hana Mori",        role: "Accountant",    branch: "Head Office",     status: "valid", timeIn: "08:02 AM", lat: 40.75805, lng: -73.98535, drifted: false },
-  { id: 37, name: "Kwame Asante",     role: "IT Support",    branch: "Head Office",     status: "late",  timeIn: "09:08 AM", lat: 40.75789, lng: -73.98560, drifted: false },
-  { id: 38, name: "Yuki Tanaka",      role: "Admin",         branch: "Head Office",     status: "valid", timeIn: "07:55 AM", lat: 40.75802, lng: -73.98545, drifted: false },
-  { id: 39, name: "Leo Fernandes",    role: "Sales",         branch: "Head Office",     status: "valid", timeIn: "08:18 AM", lat: 40.75812, lng: -73.98565, drifted: false },
-  { id: 40, name: "Zara Ahmed",       role: "Compliance",    branch: "Head Office",     status: "late",  timeIn: "09:22 AM", lat: 40.75795, lng: -73.98548, drifted: false },
-  // Head Office — drifted (left, GPS still on)
-  { id: 7,  name: "Dana Okafor",      role: "Finance",       branch: "Head Office",     status: "valid", timeIn: "07:58 AM", lat: 40.7610,  lng: -73.9840,  drifted: true  },
-  { id: 8,  name: "Tara Silva",       role: "Marketing",     branch: "Head Office",     status: "late",  timeIn: "09:20 AM", lat: 40.7552,  lng: -73.9875,  drifted: true  },
+  // ── Head Office — New York (40.7128, -74.0060 | r=100m) ──
+  { id: 1,  name: "Lena Vogel",       role: "HR Manager",    branch: "Head Office",     status: "late",  timeIn: "08:35 AM", lat: 40.71295, lng: -74.00580, drifted: false },
+  { id: 2,  name: "Priya Kumar",      role: "Developer",     branch: "Head Office",     status: "late",  timeIn: "09:15 AM", lat: 40.71260, lng: -74.00635, drifted: false },
+  { id: 3,  name: "Felix Nguyen",     role: "Security",      branch: "Head Office",     status: "valid", timeIn: "08:00 AM", lat: 40.71310, lng: -74.00550, drifted: false },
+  { id: 4,  name: "Rachel Kim",       role: "Operations",    branch: "Head Office",     status: "valid", timeIn: "08:10 AM", lat: 40.71270, lng: -74.00620, drifted: false },
+  { id: 5,  name: "Owen Brooks",      role: "Legal",         branch: "Head Office",     status: "valid", timeIn: "07:59 AM", lat: 40.71290, lng: -74.00590, drifted: false },
+  { id: 6,  name: "Marcus Reid",      role: "Engineer",      branch: "Head Office",     status: "valid", timeIn: "08:04 AM", lat: 40.71278, lng: -74.00608, drifted: false },
+  { id: 36, name: "Hana Mori",        role: "Accountant",    branch: "Head Office",     status: "valid", timeIn: "08:02 AM", lat: 40.71300, lng: -74.00565, drifted: false },
+  { id: 37, name: "Kwame Asante",     role: "IT Support",    branch: "Head Office",     status: "late",  timeIn: "09:08 AM", lat: 40.71252, lng: -74.00655, drifted: false },
+  { id: 38, name: "Yuki Tanaka",      role: "Admin",         branch: "Head Office",     status: "valid", timeIn: "07:55 AM", lat: 40.71285, lng: -74.00595, drifted: false },
+  { id: 39, name: "Leo Fernandes",    role: "Sales",         branch: "Head Office",     status: "valid", timeIn: "08:18 AM", lat: 40.71305, lng: -74.00570, drifted: false },
+  { id: 40, name: "Zara Ahmed",       role: "Compliance",    branch: "Head Office",     status: "late",  timeIn: "09:22 AM", lat: 40.71265, lng: -74.00625, drifted: false },
+  // Head Office — drifted
+  { id: 7,  name: "Dana Okafor",      role: "Finance",       branch: "Head Office",     status: "valid", timeIn: "07:58 AM", lat: 40.7178,  lng: -73.9985,  drifted: true  },
+  { id: 8,  name: "Tara Silva",       role: "Marketing",     branch: "Head Office",     status: "late",  timeIn: "09:20 AM", lat: 40.7072,  lng: -74.0135,  drifted: true  },
 
-  // ── Westside Branch (40.75440, -73.99150 | r=150m) ──
-  { id: 9,  name: "Sam Ford",         role: "Supervisor",    branch: "Westside Branch", status: "valid", timeIn: "07:55 AM", lat: 40.75448, lng: -73.99138, drifted: false },
-  { id: 10, name: "Brian Torres",     role: "Support",       branch: "Westside Branch", status: "late",  timeIn: "09:02 AM", lat: 40.75432, lng: -73.99162, drifted: false },
-  { id: 11, name: "Kylie Park",       role: "Cashier",       branch: "Westside Branch", status: "valid", timeIn: "08:00 AM", lat: 40.75450, lng: -73.99135, drifted: false },
-  { id: 12, name: "James Osei",       role: "Sales Lead",    branch: "Westside Branch", status: "valid", timeIn: "08:22 AM", lat: 40.75435, lng: -73.99158, drifted: false },
-  { id: 42, name: "Fatima Al-Hassan", role: "Teller",        branch: "Westside Branch", status: "valid", timeIn: "07:58 AM", lat: 40.75442, lng: -73.99145, drifted: false },
-  { id: 43, name: "Chris Banda",      role: "Security",      branch: "Westside Branch", status: "valid", timeIn: "07:50 AM", lat: 40.75448, lng: -73.99140, drifted: false },
-  { id: 44, name: "Nadia Petrov",     role: "Customer Svc.", branch: "Westside Branch", status: "late",  timeIn: "09:12 AM", lat: 40.75429, lng: -73.99166, drifted: false },
-  { id: 45, name: "Emre Yilmaz",      role: "Back Office",   branch: "Westside Branch", status: "valid", timeIn: "08:14 AM", lat: 40.75445, lng: -73.99148, drifted: false },
+  // ── Westside Branch — Los Angeles (34.0522, -118.2437 | r=150m) ──
+  { id: 9,  name: "Sam Ford",         role: "Supervisor",    branch: "Westside Branch", status: "valid", timeIn: "07:55 AM", lat: 34.05235, lng: -118.24352, drifted: false },
+  { id: 10, name: "Brian Torres",     role: "Support",       branch: "Westside Branch", status: "late",  timeIn: "09:02 AM", lat: 34.05200, lng: -118.24398, drifted: false },
+  { id: 11, name: "Kylie Park",       role: "Cashier",       branch: "Westside Branch", status: "valid", timeIn: "08:00 AM", lat: 34.05250, lng: -118.24322, drifted: false },
+  { id: 12, name: "James Osei",       role: "Sales Lead",    branch: "Westside Branch", status: "valid", timeIn: "08:22 AM", lat: 34.05208, lng: -118.24388, drifted: false },
+  { id: 42, name: "Fatima Al-Hassan", role: "Teller",        branch: "Westside Branch", status: "valid", timeIn: "07:58 AM", lat: 34.05225, lng: -118.24360, drifted: false },
+  { id: 43, name: "Chris Banda",      role: "Security",      branch: "Westside Branch", status: "valid", timeIn: "07:50 AM", lat: 34.05232, lng: -118.24345, drifted: false },
+  { id: 44, name: "Nadia Petrov",     role: "Customer Svc.", branch: "Westside Branch", status: "late",  timeIn: "09:12 AM", lat: 34.05192, lng: -118.24412, drifted: false },
+  { id: 45, name: "Emre Yilmaz",      role: "Back Office",   branch: "Westside Branch", status: "valid", timeIn: "08:14 AM", lat: 34.05218, lng: -118.24375, drifted: false },
   // Westside — drifted
-  { id: 13, name: "Aisha Williams",   role: "Clerk",         branch: "Westside Branch", status: "late",  timeIn: "09:10 AM", lat: 40.7512,  lng: -73.9938,  drifted: true  },
-  { id: 15, name: "Jonah Pierce",     role: "Warehouse",     branch: "Westside Branch", status: "valid", timeIn: "08:05 AM", lat: 40.7524,  lng: -73.9878,  drifted: true  },
+  { id: 13, name: "Aisha Williams",   role: "Clerk",         branch: "Westside Branch", status: "late",  timeIn: "09:10 AM", lat: 34.0478,  lng: -118.2512,  drifted: true  },
+  { id: 15, name: "Jonah Pierce",     role: "Warehouse",     branch: "Westside Branch", status: "valid", timeIn: "08:05 AM", lat: 34.0490,  lng: -118.2375,  drifted: true  },
 
-  // ── Downtown Hub (40.75440, -73.97950 | r=75m) ──
-  { id: 16, name: "Asha Patel",       role: "Designer",      branch: "Downtown Hub",    status: "valid", timeIn: "08:11 AM", lat: 40.75448, lng: -73.97945, drifted: false },
-  { id: 17, name: "Suki Yamamoto",    role: "Manager",       branch: "Downtown Hub",    status: "late",  timeIn: "09:30 AM", lat: 40.75432, lng: -73.97965, drifted: false },
-  { id: 18, name: "Mei Lin",          role: "QA",            branch: "Downtown Hub",    status: "valid", timeIn: "08:15 AM", lat: 40.75450, lng: -73.97938, drifted: false },
-  { id: 19, name: "Diego Ruiz",       role: "Engineer",      branch: "Downtown Hub",    status: "valid", timeIn: "08:05 AM", lat: 40.75435, lng: -73.97958, drifted: false },
-  { id: 20, name: "Nina Chow",        role: "Analyst",       branch: "Downtown Hub",    status: "valid", timeIn: "08:55 AM", lat: 40.75443, lng: -73.97950, drifted: false },
-  { id: 47, name: "Tobias Schmidt",   role: "Dev Lead",      branch: "Downtown Hub",    status: "valid", timeIn: "07:52 AM", lat: 40.75440, lng: -73.97960, drifted: false },
-  { id: 48, name: "Chloe Dubois",     role: "UX Designer",   branch: "Downtown Hub",    status: "late",  timeIn: "09:18 AM", lat: 40.75432, lng: -73.97953, drifted: false },
-  { id: 49, name: "Arjun Nair",       role: "Data Analyst",  branch: "Downtown Hub",    status: "valid", timeIn: "08:08 AM", lat: 40.75448, lng: -73.97940, drifted: false },
-  { id: 50, name: "Sofia Greco",      role: "PM",            branch: "Downtown Hub",    status: "valid", timeIn: "08:25 AM", lat: 40.75441, lng: -73.97945, drifted: false },
+  // ── Downtown Hub — Chicago (41.8781, -87.6298 | r=75m) ──
+  { id: 16, name: "Asha Patel",       role: "Designer",      branch: "Downtown Hub",    status: "valid", timeIn: "08:11 AM", lat: 41.87825, lng: -87.62958, drifted: false },
+  { id: 17, name: "Suki Yamamoto",    role: "Manager",       branch: "Downtown Hub",    status: "late",  timeIn: "09:30 AM", lat: 41.87790, lng: -87.63010, drifted: false },
+  { id: 18, name: "Mei Lin",          role: "QA",            branch: "Downtown Hub",    status: "valid", timeIn: "08:15 AM", lat: 41.87835, lng: -87.62940, drifted: false },
+  { id: 19, name: "Diego Ruiz",       role: "Engineer",      branch: "Downtown Hub",    status: "valid", timeIn: "08:05 AM", lat: 41.87800, lng: -87.62995, drifted: false },
+  { id: 20, name: "Nina Chow",        role: "Analyst",       branch: "Downtown Hub",    status: "valid", timeIn: "08:55 AM", lat: 41.87815, lng: -87.62972, drifted: false },
+  { id: 47, name: "Tobias Schmidt",   role: "Dev Lead",      branch: "Downtown Hub",    status: "valid", timeIn: "07:52 AM", lat: 41.87808, lng: -87.62978, drifted: false },
+  { id: 48, name: "Chloe Dubois",     role: "UX Designer",   branch: "Downtown Hub",    status: "late",  timeIn: "09:18 AM", lat: 41.87782, lng: -87.63018, drifted: false },
+  { id: 49, name: "Arjun Nair",       role: "Data Analyst",  branch: "Downtown Hub",    status: "valid", timeIn: "08:08 AM", lat: 41.87828, lng: -87.62950, drifted: false },
+  { id: 50, name: "Sofia Greco",      role: "PM",            branch: "Downtown Hub",    status: "valid", timeIn: "08:25 AM", lat: 41.87818, lng: -87.62963, drifted: false },
   // Downtown — drifted
-  { id: 21, name: "Nathan Cross",     role: "Product",       branch: "Downtown Hub",    status: "late",  timeIn: "09:05 AM", lat: 40.7518,  lng: -73.9790,  drifted: true  },
-  { id: 22, name: "Layla Storms",     role: "Intern",        branch: "Downtown Hub",    status: "valid", timeIn: "08:45 AM", lat: 40.7520,  lng: -73.9840,  drifted: true  },
-  { id: 23, name: "Victor Osei",      role: "Consultant",    branch: "Downtown Hub",    status: "late",  timeIn: "09:15 AM", lat: 40.7512,  lng: -73.9768,  drifted: true  },
-  { id: 51, name: "Hira Baig",        role: "Auditor",       branch: "Downtown Hub",    status: "valid", timeIn: "08:35 AM", lat: 40.7590,  lng: -73.9812,  drifted: true  },
+  { id: 21, name: "Nathan Cross",     role: "Product",       branch: "Downtown Hub",    status: "late",  timeIn: "09:05 AM", lat: 41.8725,  lng: -87.6298,  drifted: true  },
+  { id: 22, name: "Layla Storms",     role: "Intern",        branch: "Downtown Hub",    status: "valid", timeIn: "08:45 AM", lat: 41.8732,  lng: -87.6370,  drifted: true  },
+  { id: 23, name: "Victor Osei",      role: "Consultant",    branch: "Downtown Hub",    status: "late",  timeIn: "09:15 AM", lat: 41.8718,  lng: -87.6228,  drifted: true  },
+  { id: 51, name: "Hira Baig",        role: "Auditor",       branch: "Downtown Hub",    status: "valid", timeIn: "08:35 AM", lat: 41.8848,  lng: -87.6315,  drifted: true  },
 
-  // ── Airport Desk (40.76160, -73.97950 | r=200m) ──
-  { id: 24, name: "Carlos Méndez",    role: "Coordinator",   branch: "Airport Desk",    status: "late",  timeIn: "08:41 AM", lat: 40.76178, lng: -73.97925, drifted: false },
-  { id: 25, name: "Luis Barros",      role: "Agent",         branch: "Airport Desk",    status: "valid", timeIn: "08:00 AM", lat: 40.76148, lng: -73.97972, drifted: false },
-  { id: 26, name: "Eve Carter",       role: "Handler",       branch: "Airport Desk",    status: "valid", timeIn: "07:50 AM", lat: 40.76168, lng: -73.97936, drifted: false },
-  { id: 27, name: "Thomas Adler",     role: "Supervisor",    branch: "Airport Desk",    status: "valid", timeIn: "08:15 AM", lat: 40.76152, lng: -73.97962, drifted: false },
-  { id: 52, name: "Jin-Ho Park",      role: "Ground Staff",  branch: "Airport Desk",    status: "valid", timeIn: "07:45 AM", lat: 40.76162, lng: -73.97945, drifted: false },
-  { id: 53, name: "Amelia Okonkwo",   role: "Check-In Sup.", branch: "Airport Desk",    status: "late",  timeIn: "09:05 AM", lat: 40.76156, lng: -73.97958, drifted: false },
-  { id: 54, name: "Sven Eriksson",    role: "Baggage Lead",  branch: "Airport Desk",    status: "valid", timeIn: "08:10 AM", lat: 40.76172, lng: -73.97930, drifted: false },
-  { id: 55, name: "Aiko Watanabe",    role: "Gate Agent",    branch: "Airport Desk",    status: "valid", timeIn: "07:58 AM", lat: 40.76145, lng: -73.97976, drifted: false },
-  { id: 56, name: "Reza Tehrani",     role: "Ops Manager",   branch: "Airport Desk",    status: "valid", timeIn: "07:48 AM", lat: 40.76166, lng: -73.97940, drifted: false },
+  // ── Airport Desk — Houston (29.7604, -95.3698 | r=200m) ──
+  { id: 24, name: "Carlos Méndez",    role: "Coordinator",   branch: "Airport Desk",    status: "late",  timeIn: "08:41 AM", lat: 29.76062, lng: -95.36948, drifted: false },
+  { id: 25, name: "Luis Barros",      role: "Agent",         branch: "Airport Desk",    status: "valid", timeIn: "08:00 AM", lat: 29.76020, lng: -95.37018, drifted: false },
+  { id: 26, name: "Eve Carter",       role: "Handler",       branch: "Airport Desk",    status: "valid", timeIn: "07:50 AM", lat: 29.76052, lng: -95.36942, drifted: false },
+  { id: 27, name: "Thomas Adler",     role: "Supervisor",    branch: "Airport Desk",    status: "valid", timeIn: "08:15 AM", lat: 29.76032, lng: -95.37000, drifted: false },
+  { id: 52, name: "Jin-Ho Park",      role: "Ground Staff",  branch: "Airport Desk",    status: "valid", timeIn: "07:45 AM", lat: 29.76042, lng: -95.36972, drifted: false },
+  { id: 53, name: "Amelia Okonkwo",   role: "Check-In Sup.", branch: "Airport Desk",    status: "late",  timeIn: "09:05 AM", lat: 29.76025, lng: -95.37008, drifted: false },
+  { id: 54, name: "Sven Eriksson",    role: "Baggage Lead",  branch: "Airport Desk",    status: "valid", timeIn: "08:10 AM", lat: 29.76058, lng: -95.36930, drifted: false },
+  { id: 55, name: "Aiko Watanabe",    role: "Gate Agent",    branch: "Airport Desk",    status: "valid", timeIn: "07:58 AM", lat: 29.76015, lng: -95.37025, drifted: false },
+  { id: 56, name: "Reza Tehrani",     role: "Ops Manager",   branch: "Airport Desk",    status: "valid", timeIn: "07:48 AM", lat: 29.76050, lng: -95.36952, drifted: false },
   // Airport — drifted
-  { id: 28, name: "Petra Kovacs",     role: "Logistics",     branch: "Airport Desk",    status: "valid", timeIn: "08:20 AM", lat: 40.7644,  lng: -73.9770,  drifted: true  },
-  { id: 29, name: "Elias Mensah",     role: "Cargo",         branch: "Airport Desk",    status: "late",  timeIn: "09:00 AM", lat: 40.7638,  lng: -73.9828,  drifted: true  },
-  { id: 30, name: "Sophie Tremblay",  role: "Check-In",      branch: "Airport Desk",    status: "valid", timeIn: "07:45 AM", lat: 40.7626,  lng: -73.9768,  drifted: true  },
+  { id: 28, name: "Petra Kovacs",     role: "Logistics",     branch: "Airport Desk",    status: "valid", timeIn: "08:20 AM", lat: 29.7658,  lng: -95.3620,  drifted: true  },
+  { id: 29, name: "Elias Mensah",     role: "Cargo",         branch: "Airport Desk",    status: "late",  timeIn: "09:00 AM", lat: 29.7548,  lng: -95.3778,  drifted: true  },
+  { id: 30, name: "Sophie Tremblay",  role: "Check-In",      branch: "Airport Desk",    status: "valid", timeIn: "07:45 AM", lat: 29.7538,  lng: -95.3625,  drifted: true  },
 
-  // ── North Campus (40.76160, -73.99150 | r=120m) ──
-  { id: 31, name: "Grace Tan",        role: "Researcher",    branch: "North Campus",    status: "late",  timeIn: "09:00 AM", lat: 40.76168, lng: -73.99145, drifted: false },
-  { id: 32, name: "Paul Monroe",      role: "Lab Tech",      branch: "North Campus",    status: "valid", timeIn: "08:30 AM", lat: 40.76152, lng: -73.99162, drifted: false },
-  { id: 33, name: "Iris Chen",        role: "Lecturer",      branch: "North Campus",    status: "valid", timeIn: "08:45 AM", lat: 40.76165, lng: -73.99138, drifted: false },
-  { id: 58, name: "Mateus Costa",     role: "TA",            branch: "North Campus",    status: "valid", timeIn: "08:20 AM", lat: 40.76155, lng: -73.99158, drifted: false },
-  { id: 59, name: "Leila Moradi",     role: "Postdoc",       branch: "North Campus",    status: "late",  timeIn: "09:14 AM", lat: 40.76162, lng: -73.99148, drifted: false },
-  { id: 60, name: "Kofi Boateng",     role: "Lab Manager",   branch: "North Campus",    status: "valid", timeIn: "07:56 AM", lat: 40.76149, lng: -73.99155, drifted: false },
+  // ── North Campus — Boston (42.3601, -71.0589 | r=120m) ──
+  { id: 31, name: "Grace Tan",        role: "Researcher",    branch: "North Campus",    status: "late",  timeIn: "09:00 AM", lat: 42.36025, lng: -71.05862, drifted: false },
+  { id: 32, name: "Paul Monroe",      role: "Lab Tech",      branch: "North Campus",    status: "valid", timeIn: "08:30 AM", lat: 42.35995, lng: -71.05918, drifted: false },
+  { id: 33, name: "Iris Chen",        role: "Lecturer",      branch: "North Campus",    status: "valid", timeIn: "08:45 AM", lat: 42.36018, lng: -71.05872, drifted: false },
+  { id: 58, name: "Mateus Costa",     role: "TA",            branch: "North Campus",    status: "valid", timeIn: "08:20 AM", lat: 42.36005, lng: -71.05898, drifted: false },
+  { id: 59, name: "Leila Moradi",     role: "Postdoc",       branch: "North Campus",    status: "late",  timeIn: "09:14 AM", lat: 42.36015, lng: -71.05878, drifted: false },
+  { id: 60, name: "Kofi Boateng",     role: "Lab Manager",   branch: "North Campus",    status: "valid", timeIn: "07:56 AM", lat: 42.35992, lng: -71.05908, drifted: false },
   // North Campus — drifted
-  { id: 35, name: "Amara Diallo",     role: "Research Asst.", branch: "North Campus",   status: "valid", timeIn: "08:50 AM", lat: 40.7580,  lng: -73.9915,  drifted: true  },
-  { id: 61, name: "Luca Ricci",       role: "Field Intern",  branch: "North Campus",    status: "late",  timeIn: "09:25 AM", lat: 40.7582,  lng: -73.9865,  drifted: true  },
+  { id: 35, name: "Amara Diallo",     role: "Research Asst.", branch: "North Campus",   status: "valid", timeIn: "08:50 AM", lat: 42.3538,  lng: -71.0589,  drifted: true  },
+  { id: 61, name: "Luca Ricci",       role: "Field Intern",  branch: "North Campus",    status: "late",  timeIn: "09:25 AM", lat: 42.3548,  lng: -71.0520,  drifted: true  },
 ];
 
-// Branches: HO(40.75800,-73.98550)  WB(40.75440,-73.99150)  DH(40.75440,-73.97950)  AD(40.76160,-73.97950)  NC(40.76160,-73.99150)
-// Each leg = 8 steps. Speeds chosen so dots crawl visibly across the screen.
+// Branches: HO=New York  WB=Los Angeles  DH=Chicago  AD=Houston  NC=Boston
+// In-transit people travel realistic inter-city routes.
+// speed = ms per waypoint step — tuned so movement is visible but not frantic.
 const movingPeople = [
-  // Jake Warren: HO → AD → NC → WB → HO  (32 steps)
-  { id: 101, name: "Jake Warren",   role: "Delivery Driver",  branch: "Head Office",     timeIn: "08:10 AM", speed: 1800,
+  // Jake Warren: New York → Philadelphia → back  (via NJ Turnpike / I-95, ~95 mi)
+  { id: 101, name: "Jake Warren",   role: "Delivery Driver",  branch: "Head Office",     timeIn: "08:10 AM", speed: 12000,
     route: [
-      {lat:40.75800,lng:-73.98550}, // HO
-      {lat:40.75845,lng:-73.98475}, {lat:40.75890,lng:-73.98400}, {lat:40.75935,lng:-73.98325},
-      {lat:40.75980,lng:-73.98250}, {lat:40.76025,lng:-73.98175}, {lat:40.76070,lng:-73.98100}, {lat:40.76115,lng:-73.98025},
-      {lat:40.76160,lng:-73.97950}, // AD
-      {lat:40.76160,lng:-73.98100}, {lat:40.76160,lng:-73.98250}, {lat:40.76160,lng:-73.98400},
-      {lat:40.76160,lng:-73.98550}, {lat:40.76160,lng:-73.98700}, {lat:40.76160,lng:-73.98850}, {lat:40.76160,lng:-73.99000},
-      {lat:40.76160,lng:-73.99150}, // NC
-      {lat:40.76070,lng:-73.99150}, {lat:40.75980,lng:-73.99150}, {lat:40.75890,lng:-73.99150},
-      {lat:40.75800,lng:-73.99150}, {lat:40.75710,lng:-73.99150}, {lat:40.75620,lng:-73.99150}, {lat:40.75530,lng:-73.99150},
-      {lat:40.75440,lng:-73.99150}, // WB
-      {lat:40.75485,lng:-73.99075}, {lat:40.75530,lng:-73.99000}, {lat:40.75575,lng:-73.98925},
-      {lat:40.75620,lng:-73.98850}, {lat:40.75665,lng:-73.98775}, {lat:40.75710,lng:-73.98700}, {lat:40.75755,lng:-73.98625},
+      { lat: 40.7128, lng: -74.0060 }, // New York, NY
+      { lat: 40.6895, lng: -74.1745 }, // Newark, NJ
+      { lat: 40.6084, lng: -74.2787 }, // Rahway, NJ
+      { lat: 40.5432, lng: -74.3632 }, // Woodbridge, NJ
+      { lat: 40.4774, lng: -74.4429 }, // New Brunswick, NJ
+      { lat: 40.3573, lng: -74.6672 }, // Princeton, NJ
+      { lat: 40.2206, lng: -74.7597 }, // Trenton, NJ
+      { lat: 40.1065, lng: -74.8506 }, // Bristol, PA
+      { lat: 40.0198, lng: -74.9662 }, // Levittown, PA
+      { lat: 39.9526, lng: -75.1652 }, // Philadelphia, PA  ← turnaround
+      { lat: 40.0198, lng: -74.9662 },
+      { lat: 40.1065, lng: -74.8506 },
+      { lat: 40.2206, lng: -74.7597 },
+      { lat: 40.3573, lng: -74.6672 },
+      { lat: 40.4774, lng: -74.4429 },
+      { lat: 40.5432, lng: -74.3632 },
+      { lat: 40.6084, lng: -74.2787 },
+      { lat: 40.6895, lng: -74.1745 },
     ] },
 
-  // Rami Haddad: DH → HO → WB → DH  (24 steps)
-  { id: 102, name: "Rami Haddad",   role: "Field Driver",     branch: "Westside Branch", timeIn: "08:30 AM", speed: 2000,
+  // Rami Haddad: Los Angeles → San Diego → back  (via I-5, ~120 mi)
+  { id: 102, name: "Rami Haddad",   role: "Field Driver",     branch: "Westside Branch", timeIn: "08:30 AM", speed: 13000,
     route: [
-      {lat:40.75440,lng:-73.97950}, // DH
-      {lat:40.75485,lng:-73.98025}, {lat:40.75530,lng:-73.98100}, {lat:40.75575,lng:-73.98175},
-      {lat:40.75620,lng:-73.98250}, {lat:40.75665,lng:-73.98325}, {lat:40.75710,lng:-73.98400}, {lat:40.75755,lng:-73.98475},
-      {lat:40.75800,lng:-73.98550}, // HO
-      {lat:40.75755,lng:-73.98625}, {lat:40.75710,lng:-73.98700}, {lat:40.75665,lng:-73.98775},
-      {lat:40.75620,lng:-73.98850}, {lat:40.75575,lng:-73.98925}, {lat:40.75530,lng:-73.99000}, {lat:40.75485,lng:-73.99075},
-      {lat:40.75440,lng:-73.99150}, // WB
-      {lat:40.75440,lng:-73.99000}, {lat:40.75440,lng:-73.98850}, {lat:40.75440,lng:-73.98700},
-      {lat:40.75440,lng:-73.98550}, {lat:40.75440,lng:-73.98400}, {lat:40.75440,lng:-73.98250}, {lat:40.75440,lng:-73.98100},
+      { lat: 34.0522, lng: -118.2437 }, // Los Angeles, CA
+      { lat: 33.9400, lng: -118.2330 }, // Compton / Downey area
+      { lat: 33.7701, lng: -118.1937 }, // Long Beach, CA
+      { lat: 33.6600, lng: -117.9988 }, // Laguna Hills, CA
+      { lat: 33.5000, lng: -117.6647 }, // San Clemente, CA
+      { lat: 33.3128, lng: -117.2917 }, // Oceanside, CA
+      { lat: 33.1581, lng: -117.2506 }, // Carlsbad, CA
+      { lat: 32.9595, lng: -117.2653 }, // Del Mar, CA
+      { lat: 32.7157, lng: -117.1611 }, // San Diego, CA  ← turnaround
+      { lat: 32.9595, lng: -117.2653 },
+      { lat: 33.1581, lng: -117.2506 },
+      { lat: 33.3128, lng: -117.2917 },
+      { lat: 33.5000, lng: -117.6647 },
+      { lat: 33.6600, lng: -117.9988 },
+      { lat: 33.7701, lng: -118.1937 },
+      { lat: 33.9400, lng: -118.2330 },
     ] },
 
-  // Omar Faris: AD → NC → WB → DH → AD  (32 steps)
-  { id: 103, name: "Omar Faris",    role: "Courier",          branch: "Airport Desk",    timeIn: "09:10 AM", speed: 2200,
+  // Omar Faris: Houston → Austin → back  (via US-290, ~165 mi)
+  { id: 103, name: "Omar Faris",    role: "Courier",          branch: "Airport Desk",    timeIn: "09:10 AM", speed: 15000,
     route: [
-      {lat:40.76160,lng:-73.97950}, // AD
-      {lat:40.76160,lng:-73.98100}, {lat:40.76160,lng:-73.98250}, {lat:40.76160,lng:-73.98400},
-      {lat:40.76160,lng:-73.98550}, {lat:40.76160,lng:-73.98700}, {lat:40.76160,lng:-73.98850}, {lat:40.76160,lng:-73.99000},
-      {lat:40.76160,lng:-73.99150}, // NC
-      {lat:40.76070,lng:-73.99150}, {lat:40.75980,lng:-73.99150}, {lat:40.75890,lng:-73.99150},
-      {lat:40.75800,lng:-73.99150}, {lat:40.75710,lng:-73.99150}, {lat:40.75620,lng:-73.99150}, {lat:40.75530,lng:-73.99150},
-      {lat:40.75440,lng:-73.99150}, // WB
-      {lat:40.75440,lng:-73.99000}, {lat:40.75440,lng:-73.98850}, {lat:40.75440,lng:-73.98700},
-      {lat:40.75440,lng:-73.98550}, {lat:40.75440,lng:-73.98400}, {lat:40.75440,lng:-73.98250}, {lat:40.75440,lng:-73.98100},
-      {lat:40.75440,lng:-73.97950}, // DH
-      {lat:40.75530,lng:-73.97950}, {lat:40.75620,lng:-73.97950}, {lat:40.75710,lng:-73.97950},
-      {lat:40.75800,lng:-73.97950}, {lat:40.75890,lng:-73.97950}, {lat:40.75980,lng:-73.97950}, {lat:40.76070,lng:-73.97950},
+      { lat: 29.7604, lng: -95.3698 }, // Houston, TX
+      { lat: 29.8266, lng: -95.5497 }, // Jersey Village, TX
+      { lat: 29.9691, lng: -95.7048 }, // Cypress, TX
+      { lat: 30.0963, lng: -96.0786 }, // Hempstead, TX
+      { lat: 30.1666, lng: -96.3977 }, // Brenham, TX
+      { lat: 30.2150, lng: -96.8140 }, // Giddings, TX
+      { lat: 30.3493, lng: -97.3700 }, // Elgin, TX
+      { lat: 30.2672, lng: -97.7431 }, // Austin, TX  ← turnaround
+      { lat: 30.3493, lng: -97.3700 },
+      { lat: 30.2150, lng: -96.8140 },
+      { lat: 30.1666, lng: -96.3977 },
+      { lat: 30.0963, lng: -96.0786 },
+      { lat: 29.9691, lng: -95.7048 },
+      { lat: 29.8266, lng: -95.5497 },
     ] },
 
-  // Mia Larsson: WB → DH → AD → WB  (24 steps, diagonal AD→WB)
-  { id: 104, name: "Mia Larsson",   role: "Field Agent",      branch: "Westside Branch", timeIn: "09:05 AM", speed: 1600,
+  // Mia Larsson: Los Angeles → Palm Springs → back  (via I-10, ~110 mi)
+  { id: 104, name: "Mia Larsson",   role: "Field Agent",      branch: "Westside Branch", timeIn: "09:05 AM", speed: 11000,
     route: [
-      {lat:40.75440,lng:-73.99150}, // WB
-      {lat:40.75440,lng:-73.99000}, {lat:40.75440,lng:-73.98850}, {lat:40.75440,lng:-73.98700},
-      {lat:40.75440,lng:-73.98550}, {lat:40.75440,lng:-73.98400}, {lat:40.75440,lng:-73.98250}, {lat:40.75440,lng:-73.98100},
-      {lat:40.75440,lng:-73.97950}, // DH
-      {lat:40.75530,lng:-73.97950}, {lat:40.75620,lng:-73.97950}, {lat:40.75710,lng:-73.97950},
-      {lat:40.75800,lng:-73.97950}, {lat:40.75890,lng:-73.97950}, {lat:40.75980,lng:-73.97950}, {lat:40.76070,lng:-73.97950},
-      {lat:40.76160,lng:-73.97950}, // AD
-      {lat:40.76070,lng:-73.98100}, {lat:40.75980,lng:-73.98250}, {lat:40.75890,lng:-73.98400},
-      {lat:40.75800,lng:-73.98550}, {lat:40.75710,lng:-73.98700}, {lat:40.75620,lng:-73.98850}, {lat:40.75530,lng:-73.99000},
+      { lat: 34.0522, lng: -118.2437 }, // Los Angeles, CA
+      { lat: 34.0953, lng: -118.1270 }, // Alhambra / San Gabriel
+      { lat: 34.0553, lng: -117.7500 }, // Pomona, CA
+      { lat: 34.0633, lng: -117.6509 }, // Ontario, CA
+      { lat: 33.9806, lng: -117.3755 }, // Riverside, CA
+      { lat: 33.9294, lng: -116.9772 }, // Beaumont, CA
+      { lat: 33.8803, lng: -116.7760 }, // Cabazon, CA
+      { lat: 33.8303, lng: -116.5453 }, // Palm Springs, CA  ← turnaround
+      { lat: 33.8803, lng: -116.7760 },
+      { lat: 33.9294, lng: -116.9772 },
+      { lat: 33.9806, lng: -117.3755 },
+      { lat: 34.0633, lng: -117.6509 },
+      { lat: 34.0553, lng: -117.7500 },
+      { lat: 34.0953, lng: -118.1270 },
     ] },
 
-  // Derek Shaw: NC → HO → DH → NC  (24 steps, diagonal DH→NC)
-  { id: 105, name: "Derek Shaw",    role: "Site Coordinator", branch: "North Campus",    timeIn: "09:20 AM", speed: 2400,
+  // Derek Shaw: Boston → Providence → back  (via I-95, ~50 mi)
+  { id: 105, name: "Derek Shaw",    role: "Site Coordinator", branch: "North Campus",    timeIn: "09:20 AM", speed: 9000,
     route: [
-      {lat:40.76160,lng:-73.99150}, // NC
-      {lat:40.76115,lng:-73.99075}, {lat:40.76070,lng:-73.99000}, {lat:40.76025,lng:-73.98925},
-      {lat:40.75980,lng:-73.98850}, {lat:40.75935,lng:-73.98775}, {lat:40.75890,lng:-73.98700}, {lat:40.75845,lng:-73.98625},
-      {lat:40.75800,lng:-73.98550}, // HO
-      {lat:40.75755,lng:-73.98475}, {lat:40.75710,lng:-73.98400}, {lat:40.75665,lng:-73.98325},
-      {lat:40.75620,lng:-73.98250}, {lat:40.75575,lng:-73.98175}, {lat:40.75530,lng:-73.98100}, {lat:40.75485,lng:-73.98025},
-      {lat:40.75440,lng:-73.97950}, // DH
-      {lat:40.75530,lng:-73.98100}, {lat:40.75620,lng:-73.98250}, {lat:40.75710,lng:-73.98400},
-      {lat:40.75800,lng:-73.98550}, {lat:40.75890,lng:-73.98700}, {lat:40.75980,lng:-73.98850}, {lat:40.76070,lng:-73.99000},
+      { lat: 42.3601, lng: -71.0589 }, // Boston, MA
+      { lat: 42.2418, lng: -71.1673 }, // Dedham, MA
+      { lat: 42.1472, lng: -71.2495 }, // Walpole, MA
+      { lat: 42.0834, lng: -71.3978 }, // Franklin, MA
+      { lat: 41.9445, lng: -71.2852 }, // Attleboro, MA
+      { lat: 41.8787, lng: -71.3828 }, // Pawtucket, RI
+      { lat: 41.8240, lng: -71.4128 }, // Providence, RI  ← turnaround
+      { lat: 41.8787, lng: -71.3828 },
+      { lat: 41.9445, lng: -71.2852 },
+      { lat: 42.0834, lng: -71.3978 },
+      { lat: 42.1472, lng: -71.2495 },
+      { lat: 42.2418, lng: -71.1673 },
     ] },
 ];
 
