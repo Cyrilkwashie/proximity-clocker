@@ -9,7 +9,7 @@ import "leaflet/dist/leaflet.css";
 
 // 5 branches across Greater Accra — auto-fit on load
 const branches = [
-  { id: 1, name: "Head Office",     address: "14 Ring Road East",        city: "Osu, Accra",            lat: 5.5600,  lng: -0.1750,  radius: 100, employees: 42, active: 38, status: "active"   },
+  { id: 1, name: "Union Systems Globals", address: "Dansoman, Accra",      city: "Dansoman, Accra",       lat: 5.54940, lng: -0.23358, radius: 100, employees: 42, active: 38, status: "active"   },
   { id: 2, name: "Westside Branch", address: "Kasoa Main Road",          city: "Kasoa, Central Region", lat: 5.5187,  lng: -0.4307,  radius: 150, employees: 19, active: 17, status: "active"   },
   { id: 3, name: "Downtown Hub",    address: "East Legon Hills Avenue",  city: "East Legon, Accra",     lat: 5.6347,  lng: -0.1483,  radius: 75,  employees: 28, active: 25, status: "active"   },
   { id: 4, name: "Airport Desk",    address: "Airport City, Liberia Rd", city: "Airport Res., Accra",   lat: 5.6052,  lng: -0.1668,  radius: 200, employees: 13, active: 9,  status: "active"   },
@@ -17,21 +17,21 @@ const branches = [
 ];
 
 const activePeople = [
-  // ── Head Office — Osu, Accra (5.5600, -0.1750 | r=100m) ──
-  { id: 1,  name: "Lena Vogel",       role: "HR Manager",    branch: "Head Office",     status: "late",  timeIn: "08:35 AM", lat: 5.56015, lng: -0.17485, drifted: false },
-  { id: 2,  name: "Priya Kumar",      role: "Developer",     branch: "Head Office",     status: "late",  timeIn: "09:15 AM", lat: 5.55985, lng: -0.17525, drifted: false },
-  { id: 3,  name: "Felix Nguyen",     role: "Security",      branch: "Head Office",     status: "valid", timeIn: "08:00 AM", lat: 5.56022, lng: -0.17465, drifted: false },
-  { id: 4,  name: "Rachel Kim",       role: "Operations",    branch: "Head Office",     status: "valid", timeIn: "08:10 AM", lat: 5.55992, lng: -0.17515, drifted: false },
-  { id: 5,  name: "Owen Brooks",      role: "Legal",         branch: "Head Office",     status: "valid", timeIn: "07:59 AM", lat: 5.56008, lng: -0.17492, drifted: false },
-  { id: 6,  name: "Marcus Reid",      role: "Engineer",      branch: "Head Office",     status: "valid", timeIn: "08:04 AM", lat: 5.55996, lng: -0.17505, drifted: false },
-  { id: 36, name: "Hana Mori",        role: "Accountant",    branch: "Head Office",     status: "valid", timeIn: "08:02 AM", lat: 5.56018, lng: -0.17472, drifted: false },
-  { id: 37, name: "Kwame Asante",     role: "IT Support",    branch: "Head Office",     status: "late",  timeIn: "09:08 AM", lat: 5.55978, lng: -0.17538, drifted: false },
-  { id: 38, name: "Yuki Tanaka",      role: "Admin",         branch: "Head Office",     status: "valid", timeIn: "07:55 AM", lat: 5.56003, lng: -0.17495, drifted: false },
-  { id: 39, name: "Leo Fernandes",    role: "Sales",         branch: "Head Office",     status: "valid", timeIn: "08:18 AM", lat: 5.56019, lng: -0.17470, drifted: false },
-  { id: 40, name: "Zara Ahmed",       role: "Compliance",    branch: "Head Office",     status: "late",  timeIn: "09:22 AM", lat: 5.55988, lng: -0.17520, drifted: false },
-  // Head Office — drifted
-  { id: 7,  name: "Dana Okafor",      role: "Finance",       branch: "Head Office",     status: "valid", timeIn: "07:58 AM", lat: 5.5650,  lng: -0.1680,  drifted: true  },
-  { id: 8,  name: "Tara Silva",       role: "Marketing",     branch: "Head Office",     status: "late",  timeIn: "09:20 AM", lat: 5.5542,  lng: -0.1822,  drifted: true  },
+  // ── Union Systems Globals — Dansoman, Accra (5.54940, -0.23358 | r=100m) ──
+  { id: 1,  name: "Lena Vogel",       role: "HR Manager",    branch: "Union Systems Globals", status: "late",  timeIn: "08:35 AM", lat: 5.54952, lng: -0.23345, drifted: false },
+  { id: 2,  name: "Priya Kumar",      role: "Developer",     branch: "Union Systems Globals", status: "late",  timeIn: "09:15 AM", lat: 5.54928, lng: -0.23372, drifted: false },
+  { id: 3,  name: "Felix Nguyen",     role: "Security",      branch: "Union Systems Globals", status: "valid", timeIn: "08:00 AM", lat: 5.54948, lng: -0.23342, drifted: false },
+  { id: 4,  name: "Rachel Kim",       role: "Operations",    branch: "Union Systems Globals", status: "valid", timeIn: "08:10 AM", lat: 5.54933, lng: -0.23365, drifted: false },
+  { id: 5,  name: "Owen Brooks",      role: "Legal",         branch: "Union Systems Globals", status: "valid", timeIn: "07:59 AM", lat: 5.54941, lng: -0.23354, drifted: false },
+  { id: 6,  name: "Marcus Reid",      role: "Engineer",      branch: "Union Systems Globals", status: "valid", timeIn: "08:04 AM", lat: 5.54936, lng: -0.23360, drifted: false },
+  { id: 36, name: "Hana Mori",        role: "Accountant",    branch: "Union Systems Globals", status: "valid", timeIn: "08:02 AM", lat: 5.54944, lng: -0.23344, drifted: false },
+  { id: 37, name: "Kwame Asante",     role: "IT Support",    branch: "Union Systems Globals", status: "late",  timeIn: "09:08 AM", lat: 5.54923, lng: -0.23376, drifted: false },
+  { id: 38, name: "Yuki Tanaka",      role: "Admin",         branch: "Union Systems Globals", status: "valid", timeIn: "07:55 AM", lat: 5.54939, lng: -0.23357, drifted: false },
+  { id: 39, name: "Leo Fernandes",    role: "Sales",         branch: "Union Systems Globals", status: "valid", timeIn: "08:18 AM", lat: 5.54946, lng: -0.23341, drifted: false },
+  { id: 40, name: "Zara Ahmed",       role: "Compliance",    branch: "Union Systems Globals", status: "late",  timeIn: "09:22 AM", lat: 5.54930, lng: -0.23369, drifted: false },
+  // Union Systems Globals — drifted
+  { id: 7,  name: "Dana Okafor",      role: "Finance",       branch: "Union Systems Globals", status: "valid", timeIn: "07:58 AM", lat: 5.5550,  lng: -0.2250,  drifted: true  },
+  { id: 8,  name: "Tara Silva",       role: "Marketing",     branch: "Union Systems Globals", status: "late",  timeIn: "09:20 AM", lat: 5.5430,  lng: -0.2430,  drifted: true  },
 
   // ── Westside Branch — Kasoa (5.5187, -0.4307 | r=150m) ──
   { id: 9,  name: "Sam Ford",         role: "Supervisor",    branch: "Westside Branch", status: "valid", timeIn: "07:55 AM", lat: 5.51882, lng: -0.43052, drifted: false },
@@ -89,31 +89,37 @@ const activePeople = [
   { id: 61, name: "Luca Ricci",       role: "Field Intern",  branch: "North Campus",    status: "late",  timeIn: "09:25 AM", lat: 5.6055,  lng: -0.2195,  drifted: true  },
 ];
 
-// Branches: HO=Osu  WB=Kasoa  DH=East Legon  AD=Airport Residential  NC=Achimota
+// Branches: HO=Union Systems Globals (Dansoman)  WB=Kasoa  DH=East Legon  AD=Airport Residential  NC=Achimota
 // In-transit drivers travel realistic Accra inter-area routes at road speed.
-// speed = ms per waypoint step.
+// speed = ms per waypoint step (calibrated: step distance ÷ road speed).
 const movingPeople = [
-  // Jake Warren: Osu → Tema via N2/Motorway (~30 km)
-  { id: 101, name: "Jake Warren",   role: "Delivery Driver",  branch: "Head Office",     timeIn: "08:10 AM", speed: 10000,
+  // Jake Warren: Union Systems Globals → Tema via Kaneshie / N2 Motorway (~28 km)
+  // avg step ~2.8 km, N2 highway ~60 km/h → 2.8 km ÷ 60 = 2.8 min ≈ 168 000 ms → 170 000 ms
+  { id: 101, name: "Jake Warren",   role: "Delivery Driver",  branch: "Union Systems Globals", timeIn: "08:10 AM", speed: 170000,
     route: [
-      { lat: 5.5600, lng: -0.1750 }, // Osu, Accra
-      { lat: 5.5680, lng: -0.1620 }, // Labadi / La
-      { lat: 5.5820, lng: -0.1450 }, // Teshie
-      { lat: 5.5980, lng: -0.1230 }, // Nungua
-      { lat: 5.6120, lng: -0.0950 }, // Baatsona / Spintex
-      { lat: 5.6300, lng: -0.0680 }, // Ashaiman border
-      { lat: 5.6480, lng: -0.0430 }, // Ashaiman
-      { lat: 5.6698, lng: -0.0177 }, // Tema Community 1  ← turnaround
-      { lat: 5.6480, lng: -0.0430 },
-      { lat: 5.6300, lng: -0.0680 },
-      { lat: 5.6120, lng: -0.0950 },
-      { lat: 5.5980, lng: -0.1230 },
-      { lat: 5.5820, lng: -0.1450 },
-      { lat: 5.5680, lng: -0.1620 },
+      { lat: 5.54940, lng: -0.23358 }, // Union Systems Globals, Dansoman
+      { lat: 5.55250, lng: -0.21500 }, // Kaneshie / Kwame Nkrumah Circle
+      { lat: 5.56000, lng: -0.19000 }, // La Motorway entry
+      { lat: 5.56800, lng: -0.16200 }, // Labadi / La
+      { lat: 5.58200, lng: -0.14500 }, // Teshie
+      { lat: 5.59800, lng: -0.12300 }, // Nungua
+      { lat: 5.61200, lng: -0.09500 }, // Baatsona / Spintex
+      { lat: 5.63000, lng: -0.06800 }, // Ashaiman border
+      { lat: 5.64800, lng: -0.04300 }, // Ashaiman
+      { lat: 5.66980, lng: -0.01770 }, // Tema Community 1  ← turnaround
+      { lat: 5.64800, lng: -0.04300 },
+      { lat: 5.63000, lng: -0.06800 },
+      { lat: 5.61200, lng: -0.09500 },
+      { lat: 5.59800, lng: -0.12300 },
+      { lat: 5.58200, lng: -0.14500 },
+      { lat: 5.56800, lng: -0.16200 },
+      { lat: 5.56000, lng: -0.19000 },
+      { lat: 5.55250, lng: -0.21500 },
     ] },
 
   // Rami Haddad: Kasoa → Accra Central via N1 (~30 km)
-  { id: 102, name: "Rami Haddad",   role: "Field Driver",     branch: "Westside Branch", timeIn: "08:30 AM", speed: 11000,
+  // avg step ~4.1 km, N1 ~60 km/h → 4.1 km ÷ 60 = 4.1 min ≈ 246 000 ms → 250 000 ms
+  { id: 102, name: "Rami Haddad",   role: "Field Driver",     branch: "Westside Branch", timeIn: "08:30 AM", speed: 250000,
     route: [
       { lat: 5.5187, lng: -0.4307 }, // Kasoa
       { lat: 5.5270, lng: -0.3900 }, // Weija Junction
@@ -131,8 +137,9 @@ const movingPeople = [
       { lat: 5.5270, lng: -0.3900 },
     ] },
 
-  // Omar Faris: Airport Residential → East Legon via Ring Road / Motorway (~15 km)
-  { id: 103, name: "Omar Faris",    role: "Courier",          branch: "Airport Desk",    timeIn: "09:10 AM", speed: 8000,
+  // Omar Faris: Airport Residential → East Legon via Ring Road (~8 km)
+  // avg step ~0.85 km, Ring Road ~30 km/h → 0.85 km ÷ 30 = 1.7 min ≈ 102 000 ms → 100 000 ms
+  { id: 103, name: "Omar Faris",    role: "Courier",          branch: "Airport Desk",    timeIn: "09:10 AM", speed: 100000,
     route: [
       { lat: 5.6052, lng: -0.1668 }, // Airport Residential
       { lat: 5.6100, lng: -0.1580 }, // Cantonments
@@ -146,8 +153,9 @@ const movingPeople = [
       { lat: 5.6100, lng: -0.1580 },
     ] },
 
-  // Mia Larsson: East Legon → Achimota via Tetteh Quarshie / Ring Road (~18 km)
-  { id: 104, name: "Mia Larsson",   role: "Field Agent",      branch: "Westside Branch", timeIn: "09:05 AM", speed: 9000,
+  // Mia Larsson: East Legon → Achimota via Tetteh Quarshie / Ring Road (~11 km)
+  // avg step ~1.83 km, Ring Road ~35 km/h → 1.83 km ÷ 35 = 3.1 min ≈ 190 000 ms
+  { id: 104, name: "Mia Larsson",   role: "Field Agent",      branch: "Westside Branch", timeIn: "09:05 AM", speed: 190000,
     route: [
       { lat: 5.6347, lng: -0.1483 }, // East Legon
       { lat: 5.6305, lng: -0.1680 }, // Tetteh Quarshie roundabout
@@ -161,8 +169,9 @@ const movingPeople = [
       { lat: 5.6305, lng: -0.1680 },
     ] },
 
-  // Derek Shaw: Achimota → Kasoa via Odorkor / N1 (~40 km)
-  { id: 105, name: "Derek Shaw",    role: "Site Coordinator", branch: "North Campus",    timeIn: "09:20 AM", speed: 12000,
+  // Derek Shaw: Achimota → Kasoa via Odorkor / N1 (~35 km)
+  // avg step ~3.7 km, N1 ~60 km/h → 3.7 km ÷ 60 = 3.7 min ≈ 222 000 ms → 220 000 ms
+  { id: 105, name: "Derek Shaw",    role: "Site Coordinator", branch: "North Campus",    timeIn: "09:20 AM", speed: 220000,
     route: [
       { lat: 5.6101, lng: -0.2268 }, // Achimota
       { lat: 5.5950, lng: -0.2420 }, // Lapaz / Ofankor

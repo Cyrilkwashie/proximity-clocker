@@ -27,7 +27,7 @@ type BranchEmployee = {
 };
 
 const initialBranches: Branch[] = [
-  { id: 1, name: "Head Office",     address: "14 Ring Road East",        city: "Osu, Accra",            country: "Ghana", lat: 5.5600, lng: -0.1750, radius: 100, employees: 42, active: 38, status: "active"   },
+  { id: 1, name: "Union Systems Globals", address: "Dansoman, Accra",      city: "Dansoman, Accra",       country: "Ghana", lat: 5.54940, lng: -0.23358, radius: 100, employees: 42, active: 38, status: "active"   },
   { id: 2, name: "Westside Branch", address: "Kasoa Main Road",          city: "Kasoa, Central Region", country: "Ghana", lat: 5.5187, lng: -0.4307, radius: 150, employees: 19, active: 17, status: "active"   },
   { id: 3, name: "Downtown Hub",    address: "East Legon Hills Avenue",  city: "East Legon, Accra",     country: "Ghana", lat: 5.6347, lng: -0.1483, radius: 75,  employees: 28, active: 25, status: "active"   },
   { id: 4, name: "Airport Desk",    address: "Airport City, Liberia Rd", city: "Airport Res., Accra",   country: "Ghana", lat: 5.6052, lng: -0.1668, radius: 200, employees: 13, active: 9,  status: "active"   },
