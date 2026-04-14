@@ -28,6 +28,8 @@ const recentRecords = [
   { date: "Wed, Apr 8", timeIn: "09:01 AM", timeOut: "05:15 PM", status: "valid" },
 ];
 
+const CLOCK_KEY = "prox_clock_state";
+
 export default function UserDashboard() {
   const [locStatus, setLocStatus] = useState<LocStatus>("checking");
   const [clockedIn, setClockedIn] = useState(false);
@@ -43,6 +45,30 @@ export default function UserDashboard() {
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(t);
+  }, []);
+
+  // Rehydrate clock state from localStorage on mount
+  useEffect(() => {
+    const raw = localStorage.getItem(CLOCK_KEY);
+    if (!raw) return;
+    try {
+      const saved = JSON.parse(raw) as {
+        clockedIn: boolean;
+        clockInTime: string;
+        clockInDateMs: number;
+        clockOutTime: string | null;
+      };
+      if (saved.clockedIn) {
+        const d = new Date(saved.clockInDateMs);
+        setClockedIn(true);
+        setClockInTime(saved.clockInTime);
+        setClockInDate(d);
+        setClockOutTime(null);
+        setElapsed(Math.floor((Date.now() - d.getTime()) / 1000));
+      }
+    } catch {
+      localStorage.removeItem(CLOCK_KEY);
+    }
   }, []);
 
   // Elapsed shift timer
@@ -74,14 +100,17 @@ export default function UserDashboard() {
     setActing(true);
     setTimeout(() => {
       const d = new Date();
+      const timeStr = d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
       setClockInDate(d);
-      setClockInTime(
-        d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
-      );
+      setClockInTime(timeStr);
       setClockOutTime(null);
       setClockedIn(true);
       setElapsed(0);
       setActing(false);
+      localStorage.setItem(
+        CLOCK_KEY,
+        JSON.stringify({ clockedIn: true, clockInTime: timeStr, clockInDateMs: d.getTime(), clockOutTime: null })
+      );
       showToast("Clock-in successful — Have a great day!", "success");
     }, 1200);
   }
@@ -97,6 +126,7 @@ export default function UserDashboard() {
       setClockedIn(false);
       setClockInDate(null);
       setActing(false);
+      localStorage.removeItem(CLOCK_KEY);
       showToast("Clocked out successfully — See you next time!", "success");
     }, 1200);
   }

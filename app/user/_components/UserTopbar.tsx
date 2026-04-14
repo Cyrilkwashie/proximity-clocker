@@ -101,7 +101,7 @@ export default function UserTopbar() {
 
         {/* Sign out */}
         <button
-          onClick={() => router.push("/login")}
+          onClick={() => { localStorage.removeItem("prox_clock_state"); router.push("/login"); }}
           className="flex items-center gap-1.5 text-[#737373] dark:text-[#94a3b8] hover:text-red-500 dark:hover:text-red-400 text-xs font-medium transition-colors px-2"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
