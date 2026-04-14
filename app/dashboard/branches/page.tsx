@@ -27,11 +27,11 @@ type BranchEmployee = {
 };
 
 const initialBranches: Branch[] = [
-  { id: 1, name: "Head Office",     address: "14 Commerce Ave, Suite 400", city: "New York",  country: "USA", lat: 40.7128, lng: -74.006,   radius: 100, employees: 42, active: 38, status: "active"   },
-  { id: 2, name: "Westside Branch", address: "287 West Blvd",              city: "Los Angeles",country: "USA", lat: 34.0522, lng: -118.2437, radius: 150, employees: 19, active: 17, status: "active"   },
-  { id: 3, name: "Downtown Hub",    address: "55 King Street",             city: "Chicago",    country: "USA", lat: 41.8781, lng: -87.6298,  radius: 75,  employees: 28, active: 25, status: "active"   },
-  { id: 4, name: "Airport Desk",    address: "Terminal 2, Gate C",         city: "Houston",    country: "USA", lat: 29.7604, lng: -95.3698,  radius: 200, employees: 13, active: 9,  status: "active"   },
-  { id: 5, name: "North Campus",    address: "University Park, Block 3",   city: "Boston",     country: "USA", lat: 42.3601, lng: -71.0589,  radius: 120, employees: 8,  active: 0,  status: "inactive" },
+  { id: 1, name: "Head Office",     address: "14 Ring Road East",        city: "Osu, Accra",            country: "Ghana", lat: 5.5600, lng: -0.1750, radius: 100, employees: 42, active: 38, status: "active"   },
+  { id: 2, name: "Westside Branch", address: "Kasoa Main Road",          city: "Kasoa, Central Region", country: "Ghana", lat: 5.5187, lng: -0.4307, radius: 150, employees: 19, active: 17, status: "active"   },
+  { id: 3, name: "Downtown Hub",    address: "East Legon Hills Avenue",  city: "East Legon, Accra",     country: "Ghana", lat: 5.6347, lng: -0.1483, radius: 75,  employees: 28, active: 25, status: "active"   },
+  { id: 4, name: "Airport Desk",    address: "Airport City, Liberia Rd", city: "Airport Res., Accra",   country: "Ghana", lat: 5.6052, lng: -0.1668, radius: 200, employees: 13, active: 9,  status: "active"   },
+  { id: 5, name: "North Campus",    address: "Achimota School Road",     city: "Achimota, Accra",       country: "Ghana", lat: 5.6101, lng: -0.2268, radius: 120, employees: 8,  active: 0,  status: "inactive" },
 ];
 
 const branchEmployees: Record<string, BranchEmployee[]> = {
